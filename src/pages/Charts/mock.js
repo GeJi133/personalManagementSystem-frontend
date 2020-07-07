@@ -6,7 +6,7 @@ const {inverse, info, primary, danger, warning, success, textColor} = colors;
 const chartColors = config.app.chartColors;
 const {axisColor} = chartColors;
 
-let columnColors = [inverse, primary, info, success, warning, danger, '#EC2A00', '#FF8C22'];
+let columnColors = [inverse, primary, info, success, warning, danger, '#86e0cd', '#73db74'];
 let lineColors = [primary, success, warning];
 
 export const chartData = {

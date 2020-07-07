@@ -1,6 +1,18 @@
 <template>
   <div class="dashboard-page">
-    <h1 class="page-title">Dashboard</h1>
+    <h1 class="page-title">DashBoard</h1>
+
+    <b-row>
+      <b-col xs="12" lg="6" xl="4" v-for="stat in mock.bigStat" :key="stat.id">
+        <BigStat
+          :product="stat.product"
+          :color="stat.color"
+          :total="stat.total"
+          :registrations="stat.registrations"
+          :bounce="stat.bounce"
+        />
+      </b-col>
+    </b-row>
     <b-row>
       <b-col lg="3" sm="6" xs="12">
         <div class="pb-xlg h-100">
@@ -23,14 +35,14 @@
           </Widget>
         </div>
       </b-col>
-      <b-col lg="3" sm="6" xs="12">
+      <b-col lg="5" sm="6" xs="12">
         <div class="pb-xlg h-100">
           <Widget class="h-100 mb-0" title="Revenue Breakdown" close>
             <highcharts :options="donut"></highcharts>
           </Widget>
         </div>
       </b-col>
-      <b-col lg="3" sm="6" xs="12">
+      <b-col lg="5" sm="5" xs="12">
         <div class="pb-xlg h-100">
           <Widget class="h-100 mb-0" title="App Perfomance" close>
             <p class="text-muted d-flex flex-wrap">
@@ -38,7 +50,7 @@
                 <span class="circle bg-danger text-danger mr-xs" style="font-size: 4px;">
                   .
                 </span>
-                  This Period
+                This Period
               </small>
               <small class="mr-lg d-flex align-items-center">
                 <span class="circle bg-primary text-primary mr-xs" style="font-size: 4px;">
@@ -49,14 +61,14 @@
             </p>
             <h6>SDK</h6>
             <b-progress class="mb-xs" style="height: 5px"
-              variant="danger" :value="60" :max="100" />
+                        variant="danger" :value="60" :max="100" />
             <b-progress class="mb" style="height: 5px"
-              variant="primary" :value="35" :max="100" />
+                        variant="primary" :value="35" :max="100" />
             <h6>Integration</h6>
             <b-progress class="mb-xs" style="height: 5px"
-              variant="danger" :value="40" :max="100" />
+                        variant="danger" :value="40" :max="100" />
             <b-progress style="height: 5px"
-              variant="primary" :value="55" :max="100" />
+                        variant="primary" :value="55" :max="100" />
           </Widget>
         </div>
       </b-col>
@@ -67,48 +79,37 @@
               <p class="width-150"><small>60% / 37°С / 3.3 Ghz</small></p>
               <div style="width: calc(100% - 150px)">
                 <trend
-                  :data="getRandomData()"
-                  :gradient="[appConfig.colors.danger]"
-                  :height="40"
-                  stroke-width="4"
-                  smooth />
+                        :data="getRandomData()"
+                        :gradient="[appConfig.colors.danger]"
+                        :height="40"
+                        stroke-width="4"
+                        smooth />
               </div>
             </div>
             <div class="d-flex align-items-center mb-sm">
               <p class="width-150"><small>54% / 31°С / 3.3 Ghz</small></p>
               <div style="width: calc(100% - 150px)">
                 <trend
-                  :data="getRandomData()"
-                  :gradient="[appConfig.colors.info]"
-                  :height="40"
-                  stroke-width="4"
-                  smooth />
+                        :data="getRandomData()"
+                        :gradient="[appConfig.colors.info]"
+                        :height="40"
+                        stroke-width="4"
+                        smooth />
               </div>
             </div>
             <div class="d-flex align-items-center">
               <p class="width-150"><small>57% / 21°С / 3.3 Ghz</small></p>
               <div style="width: calc(100% - 150px)">
                 <trend
-                  :data="getRandomData()"
-                  :gradient="[appConfig.colors.primary]"
-                  :height="40"
-                  stroke-width="4"
-                  smooth />
+                        :data="getRandomData()"
+                        :gradient="[appConfig.colors.primary]"
+                        :height="40"
+                        stroke-width="4"
+                        smooth />
               </div>
             </div>
           </Widget>
         </div>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col xs="12" lg="6" xl="4" v-for="stat in mock.bigStat" :key="stat.id">
-        <BigStat
-          :product="stat.product"
-          :color="stat.color"
-          :total="stat.total"
-          :registrations="stat.registrations"
-          :bounce="stat.bounce"
-        />
       </b-col>
     </b-row>
     <b-row>
@@ -159,11 +160,85 @@
           </Widget>
         </b-col>
       </b-row>
+
+<!--小组件-->
+    <b-row>
+<!--      模态框-->
+      <b-col lg="3" sm="6" xs="12">
+        <div class="pb-xlg h-100">
+      <div>
+        <b-button size="sm" class="auth-btn mb-3" variant="inverse" v-b-modal.modal-1>Launch demo modal</b-button>
+
+        <b-modal id="modal-1"  title="BootstrapVue">
+
+          <!--            <Widget class="widget-auth mx-auto" title="<h3 class='mt-0'>Login to your Web App</h3>" customHeader>-->
+          <p class="widget-auth-info">
+            Use your email to sign in.
+          </p>
+          <form class="mt" @submit.prevent="login">
+            <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
+              {{errorMessage}}
+            </b-alert>
+            <div class="form-group">
+              <input class="form-control no-border" ref="email" required type="email" name="email" placeholder="Email" />
+            </div>
+            <div class="form-group">
+              <input class="form-control no-border" ref="password" required type="password" name="password" placeholder="Password" />
+            </div>
+
+            <p class="widget-auth-info">or sign in with</p>
+            <div class="social-buttons">
+
+            </div>
+          </form>
+          <p class="widget-auth-info">
+            Don't have an account? Sign up now!
+          </p>
+          <router-link class="d-block text-center" to="login">Create an Account</router-link>
+          <!--            </Widget>-->
+
+        </b-modal>
+      </div>
+        </div>
+      </b-col>
+
+      <!--      模态框end-->
+<!--      form表单-->
+      <b-col lg="3" sm="6" xs="12">
+        <div class="pb-xlg h-100">
+      <Widget class="widget-auth " title="<h3 class='mt-0'>Form</h3>" customHeader>
+        <p class="widget-auth-info">
+          Use your email to sign in.
+        </p>
+        <form class="mt" @submit.prevent="login">
+          <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
+            {{errorMessage}}
+          </b-alert>
+          <div class="form-group">
+            <input class="form-control no-border" ref="email" required type="email" name="email" placeholder="Email" />
+          </div>
+          <div class="form-group">
+            <input class="form-control no-border" ref="password" required type="password" name="password" placeholder="Password" />
+          </div>
+          <b-button type="submit" size="sm" class="auth-btn mb-3" variant="inverse">Login</b-button>
+          <p class="widget-auth-info">or sign in with</p>
+
+        </form>
+        <p class="widget-auth-info">
+          Don't have an account? Sign up now!
+        </p>
+        <router-link class="d-block text-center" to="login">Create an Account</router-link>
+      </Widget>
+        </div>
+      </b-col>
+<!--      form的表单结束-->
+    </b-row>
   </div>
 </template>
 
 <script>
 import Widget from '@/components/Widget/Widget';
+
 import BigStat from './components/BigStat/BigStat';
 import mock from './mock';
 

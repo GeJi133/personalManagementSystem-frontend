@@ -38,18 +38,18 @@ $gray-900: #29323a !default;
 $black:    #000 !default;
 $gray-light: $gray-100 !default;
 
-$blue:    #005792 !default;
+$blue: #5b9ec9 !default;
 $indigo:  #7f3ddb !default;
 $purple:  #9964e3 !default;
 $pink:    #e54e9a !default;
-$red:     #FD5F00 !default;
-$orange:  #ff7d47 !default;
-$yellow:  #FDA700 !default;
-$green:   #68ca66 !default;
-$teal:    #21AE8C !default;
-$cyan:    #1A86D0 !default;
+$red: #c4f1e8 !default;
+$orange: #eca753 !default;
+$yellow: #70e3d3 !default;
+$green: #9aeed3 !default;
+$teal: #5bbba5 !default;
+$cyan: #5e8eb1 !default;
 $default: #E9ECEF !default;
-$inverse: #002B49 !default;
+$inverse: #537186 !default;
 
 $theme-colors: (
   primary: $blue,
@@ -114,8 +114,8 @@ $breadcrumb-padding-y: 0;
 $breadcrumb-bg: transparent;
 
 $widget-bg: #fff;
-$widget-title-color: #444;
-$widget-shadow-designated: -1px 0 8px rgba(0,0,0,.2);
+$widget-title-color: #233f5a;
+$widget-shadow-designated: -1px 0 8px rgba(58, 147, 145, 0.2);
 
 $input-btn-line-height: 1.5;
 
@@ -148,8 +148,8 @@ $dropdown-link-color: $text-color;
 
 // Widgets
 // -------------------------
-$widget-padding-vertical: 15px !default;
-$widget-padding-horizontal: 20px !default;
+$widget-padding-vertical: 40px !default;
+$widget-padding-horizontal: 60px !default;
 $widget-bg-color: $white;
 
 //== Navs

@@ -22,3 +22,36 @@
 @import 'overrides';
 @import 'general';
 @import 'utils';
+.modal-body{
+  font-family: "AaFangMeng";
+  background: white;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.modal-header{
+  border-bottom: white;
+}
+.modal-footer{
+  border-top: white;
+}
+.form{
+  font-family: "AaFangMeng";
+  background: white;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.dashboard-page{
+  font-family: AaFangMeng;
+}
+body{
+  font-family: AaFangMeng;
+}
+.table th, .table td {
+  border: 0px ;
+  color: #3c484f;
+  padding-top: 20px;
+}
+.table{
+  padding-top: 20px ;
+}
+
