@@ -32,11 +32,11 @@
         <NavLink
                 :activeItem="activeItem"
                 header="岗位管理"
-                link="/app/components"
+                link="/app/viewDepartment"
                 iconName="flaticon-network"
                 index="components"
                 :childrenLinks="[
-              { header: 'Charts', link: '/app/components/charts' },
+              { header: '部门管理', link: '/app/departmentList' },
               { header: 'Icons', link: '/app/components/icons' },
               { header: 'Maps', link: '/app/components/maps' },
             ]"

@@ -3,6 +3,8 @@ import Router from 'vue-router';
 
 import Layout from '@/components/Layout/Layout';
 import Login from '@/pages/Login/Login';
+import viewDepartment from '@/components/page/department/viewDepartment';
+import departmentList from '@/components/page/department/departmentList';
 import ErrorPage from '@/pages/Error/Error';
 // Core
 import TypographyPage from '@/pages/Typography/Typography';
@@ -77,6 +79,16 @@ export default new Router({
           path: 'components/maps',
           name: 'GoogleMapPage',
           component: GoogleMapPage,
+        },
+        {
+          path: 'viewDepartment',
+          name: 'viewDepartment',
+          component: viewDepartment,
+        },
+        {
+          path: 'departmentList',
+          name: 'departmentList',
+          component: departmentList,
         },
       ],
     },
