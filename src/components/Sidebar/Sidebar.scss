@@ -131,8 +131,7 @@
   }
 
   li > a {
-    font-size: $font-size-larger;
-
+    font-size: $font-size-mini;
     color: var(--sidebar-color);
     text-decoration: none;
 
@@ -188,5 +187,3 @@
 .groupTitle {
   margin-bottom: 15px;
 }
-
-

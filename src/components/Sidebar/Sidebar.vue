@@ -11,35 +11,47 @@
       <ul class="nav">
         <NavLink
             :activeItem="activeItem"
-            header="Dashboard"
+            header="主页"
             link="/app/dashboard"
             iconName="flaticon-home"
             index="dashboard"
             isHeader
         />
         <NavLink
-            :activeItem="activeItem"
-            header="Typography"
-            link="/app/typography"
-            iconName="flaticon-list"
-            index="typography"
-            isHeader
+                :activeItem="activeItem"
+                header="员工管理"
+                link="/app/components"
+                iconName="flaticon-network"
+                index="components"
+                :childrenLinks="[
+              { header: 'Charts', link: '/app/components/charts' },
+              { header: 'Icons', link: '/app/components/icons' },
+              { header: 'Maps', link: '/app/components/maps' },
+            ]"
         />
         <NavLink
-            :activeItem="activeItem"
-            header="Tables Basic"
-            link="/app/tables"
-            iconName="flaticon-equal-1"
-            index="tables"
-            isHeader
+                :activeItem="activeItem"
+                header="岗位管理"
+                link="/app/components"
+                iconName="flaticon-network"
+                index="components"
+                :childrenLinks="[
+              { header: 'Charts', link: '/app/components/charts' },
+              { header: 'Icons', link: '/app/components/icons' },
+              { header: 'Maps', link: '/app/components/maps' },
+            ]"
         />
         <NavLink
-            :activeItem="activeItem"
-            header="Notifications"
-            link="/app/notifications"
-            iconName="flaticon-star"
-            index="notifications"
-            isHeader
+                :activeItem="activeItem"
+                header="人事管理"
+                link="/app/components"
+                iconName="flaticon-network"
+                index="components"
+                :childrenLinks="[
+              { header: 'Charts', link: '/app/components/charts' },
+              { header: 'Icons', link: '/app/components/icons' },
+              { header: 'Maps', link: '/app/components/maps' },
+            ]"
         />
         <NavLink
             :activeItem="activeItem"
@@ -51,6 +63,11 @@
               { header: 'Charts', link: '/app/components/charts' },
               { header: 'Icons', link: '/app/components/icons' },
               { header: 'Maps', link: '/app/components/maps' },
+              {header:'Notifications',link:'/app/notifications'},
+              {header:'Tables Basic',link: '/app/tables'},
+              {header:'Typography',link: '/app/typography'},
+              {header:'DashBoard',link: '/app/dashboard'}
+
             ]"
         />
       </ul>
