@@ -20,13 +20,13 @@
         <NavLink
                 :activeItem="activeItem"
                 header="员工管理"
-                link="/app/components"
+                link="/app/career"
                 iconName="flaticon-network"
                 index="components"
                 :childrenLinks="[
-              { header: 'Charts', link: '/app/components/charts' },
-              { header: 'Icons', link: '/app/components/icons' },
-              { header: 'Maps', link: '/app/components/maps' },
+              { header: '职业生涯', link: '/app/career' },
+              { header: '外语能力', link: '/app/language' },
+              { header: '家庭及社会关系', link: '/app/family' },
             ]"
         />
         <NavLink
@@ -37,10 +37,25 @@
                 index="components"
                 :childrenLinks="[
               { header: '部门管理', link: '/app/departmentList' },
-              { header: 'Icons', link: '/app/components/icons' },
-              { header: 'Maps', link: '/app/components/maps' },
+              { header: '报表管理', link: '/app/report' },
             ]"
         />
+
+        <NavLink
+                :activeItem="activeItem"
+                header="报表管理"
+                link="/app/viewDepartment"
+                iconName="flaticon-network"
+                index="components"
+                :childrenLinks="[
+              { header: '部门报表', link: '/app/departmentReport' },
+              { header: '离职月表', link: '/app/dimission' },
+              // { header: '职位调度月表', link: '/app/entry' },
+              // { header: '入职月表', link: '/app/entry' },
+              // { header: '人事月表', link: '/app/entry' },
+            ]"
+        />
+
         <NavLink
                 :activeItem="activeItem"
                 header="人事管理"
