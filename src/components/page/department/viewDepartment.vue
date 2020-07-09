@@ -125,7 +125,7 @@
                             <tr v-for="job in jobList" :key="job.jno">
                                 <td><a href="#" @click="viewJob(job.dno)">{{job.dno}}</a></td>
                                 <td>
-                                    <a href="#" @click="viewDepartment(job.dno)">{{job.dno}}</a>
+                                    <a href="#" @click="viewJob(job.dno)">{{job.dno}}</a>
                                 </td>
                                 <td class="text-semi-muted">
                                     {{job.job}}
@@ -133,7 +133,7 @@
                                 <td>
                                     <p class="mb-0">
                                         <small>
-                                            <span class="fw-semi-bold">描述:</span>
+                                            <span class="fw-semi-bold" >描述:</span>
                                             <span class="text-muted">&nbsp; {{job.description}}</span>
                                         </small>
                                     </p>
