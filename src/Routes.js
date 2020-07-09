@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
 import Layout from '@/components/Layout/Layout';
 import Login from '@/pages/Login/Login';
 import viewDepartment from '@/components/page/department/viewDepartment';
-import departmentList from '@/components/page/department/departmentList.vue';
+import departmentList from '@/components/page/department/departmentList';
+import Sectordepartment from "./components/page/department/Sectordepartment";
 import ErrorPage from '@/pages/Error/Error';
 // Core
 import TypographyPage from '@/pages/Typography/Typography';
-import viewJob from '@/components/page/department/viewJob';
+
 // Tables
 import TablesBasicPage from '@/pages/Tables/Basic';
 
@@ -23,16 +25,20 @@ import ChartsPage from '@/pages/Charts/Charts';
 // Ui
 import IconsPage from '@/pages/Icons/Icons';
 import NotificationsPage from '@/pages/Notifications/Notifications';
-import departmentReport from '@/components/page/report/departmentReport';
-import entry from '@/components/page/report/entry';
-import jobReport from '@/components/page/report/jobReport';
-import personalReport from '@/components/page/report/personalReport';
-import dimission from '@/components/page/report/dimission';
 
+//personnel
+import confimationcontrol from "./components/page/personnel/confimationcontrol";
+import departmentmove from "./components/page/personnel/departmentmove";
+import jobgetcontrol from "./components/page/personnel/jobgetcontrol";
+import postmove from "./components/page/personnel/postmove";
+import staffover from "./components/page/personnel/staffover";
 
-import career from '@/components/page/personInfo/career';
-import language from '@/components/page/personInfo/language';
-import family from '@/components/page/personInfo/family';
+//chartcontrol
+import departmentmovechart from "./components/page/chartcontrol/departmentmovechart";
+import mouthchart from "./components/page/chartcontrol/mouthchart";
+import newstaffchart from "./components/page/chartcontrol/newstaffchart";
+import overstaffchart from "./components/page/chartcontrol/overstaffchart";
+import postmovechart from "./components/page/chartcontrol/postmovechart";
 
 import checkingIn from '@/components/page/evaluation/checkingIn';
 import salary from '@/components/page/evaluation/salary';
@@ -102,49 +108,59 @@ export default new Router({
           component: departmentList,
         },
         {
-          path: 'viewJob',
-          name: 'viewJob',
-          component: viewJob,
+          path: 'Sectordepartment',
+          name: 'Sectordepartment',
+          component: Sectordepartment,
         },
         {
-          path: 'jobReport',
-          name: 'jobReport',
-          component: jobReport,
+          path: 'departmentmovechart',
+          name: 'departmentmovechart',
+          component: departmentmovechart,
         },
         {
-          path: 'departmentReport',
-          name: 'departmentReport',
-          component: departmentReport,
+          path: 'mouthchart',
+          name: 'mouthchart',
+          component: mouthchart,
         },
         {
-          path: 'entry',
-          name: 'entry',
-          component: entry,
+          path: 'newstaffchart',
+          name: 'newstaffchart',
+          component: newstaffchart,
         },
         {
-          path: 'dimission',
-          name: 'dimission',
-          component: dimission,
+          path: 'overstaffchart',
+          name: 'overstaffchart',
+          component: overstaffchart,
         },
         {
-          path: 'personalReport',
-          name: 'personalReport',
-          component: personalReport,
+          path: 'postmovechart',
+          name: 'postmovechart',
+          component: postmovechart,
         },
         {
-          path: 'career',
-          name: 'career',
-          component: career,
+          path: 'confimationcontrol',
+          name: 'confimationcontrol',
+          component: confimationcontrol,
         },
         {
-          path: 'language',
-          name: 'language',
-          component: language,
+          path: 'departmentmove',
+          name: 'departmentmove',
+          component: departmentmove,
         },
         {
-          path: 'family',
-          name: 'family',
-          component: family,
+          path: 'jobgetcontrol',
+          name: 'jobgetcontrol',
+          component: jobgetcontrol,
+        },
+        {
+          path: 'postmove',
+          name: 'postmove',
+          component: postmove,
+        },
+        {
+          path: 'staffover',
+          name: 'staffover',
+          component: staffover,
         },
         {
           path: 'checkingIn',
