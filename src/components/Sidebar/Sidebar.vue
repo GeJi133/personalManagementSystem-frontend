@@ -31,6 +31,18 @@
         />
         <NavLink
                 :activeItem="activeItem"
+                header="员工考核"
+                link="/app/career"
+                iconName="flaticon-network"
+                index="components"
+                :childrenLinks="[
+              { header: '考勤情况', link: '/app/checkingIn' },
+              { header: '工资结算', link: '/app/salary' },
+              //{ header: '家庭及社会关系', link: '/app/family' },
+            ]"
+        />
+        <NavLink
+                :activeItem="activeItem"
                 header="岗位管理"
                 link="/app/viewDepartment"
                 iconName="flaticon-network"
@@ -68,6 +80,7 @@
               { header: 'Maps', link: '/app/components/maps' },
             ]"
         />
+
         <NavLink
             :activeItem="activeItem"
             header="Components"

@@ -34,6 +34,8 @@ import career from '@/components/page/personInfo/career';
 import language from '@/components/page/personInfo/language';
 import family from '@/components/page/personInfo/family';
 
+import checkingIn from '@/components/page/evaluation/checkingIn';
+import salary from '@/components/page/evaluation/salary';
 
 Vue.use(Router);
 
@@ -143,6 +145,16 @@ export default new Router({
           path: 'family',
           name: 'family',
           component: family,
+        },
+        {
+          path: 'checkingIn',
+          name: 'checkingIn',
+          component: checkingIn,
+        },
+        {
+          path: 'salary',
+          name: 'salary',
+          component: salary,
         },
       ],
     },
