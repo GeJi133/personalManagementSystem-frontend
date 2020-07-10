@@ -7,6 +7,10 @@ import viewDepartment from '@/components/page/department/viewDepartment';
 import departmentList from '@/components/page/department/departmentList';
 import Sectordepartment from "./components/page/department/Sectordepartment";
 import ErrorPage from '@/pages/Error/Error';
+//personInfo
+import career from '@/components/page/personInfo/career';
+import family from '@/components/page/personInfo/family';
+import language from '@/components/page/personInfo/language';
 // Core
 import TypographyPage from '@/pages/Typography/Typography';
 
@@ -39,7 +43,7 @@ import mouthchart from "./components/page/chartcontrol/mouthchart";
 import newstaffchart from "./components/page/chartcontrol/newstaffchart";
 import overstaffchart from "./components/page/chartcontrol/overstaffchart";
 import postmovechart from "./components/page/chartcontrol/postmovechart";
-
+//evaluation
 import checkingIn from '@/components/page/evaluation/checkingIn';
 import salary from '@/components/page/evaluation/salary';
 
@@ -161,6 +165,19 @@ export default new Router({
           path: 'staffover',
           name: 'staffover',
           component: staffover,
+        },
+        {
+          path: 'career',
+          name: 'career',
+          component: career,
+        },{
+          path: 'family',
+          name: 'family',
+          component: family,
+        },{
+          path: 'language',
+          name: 'language',
+          component: language,
         },
         {
           path: 'checkingIn',

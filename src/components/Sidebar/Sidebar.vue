@@ -24,21 +24,20 @@
                 iconName="flaticon-network"
                 index="components"
                 :childrenLinks="[
-              { header: 'Charts', link: '/app/components/charts' },
-              { header: 'Icons', link: '/app/components/icons' },
-              { header: 'Maps', link: '/app/components/maps' },
+              { header: '职业生涯', link: '/app/career' },
+              { header: '外语能力', link: '/app/language' },
+              { header: '家庭成员及社会关系', link: '/app/family' },
             ]"
         />
         <NavLink
                 :activeItem="activeItem"
                 header="员工考核"
-                link="/app/career"
+                link="/app/components"
                 iconName="flaticon-network"
                 index="components"
                 :childrenLinks="[
               { header: '考勤情况', link: '/app/checkingIn' },
               { header: '工资结算', link: '/app/salary' },
-              //{ header: '家庭及社会关系', link: '/app/family' },
             ]"
         />
         <NavLink
