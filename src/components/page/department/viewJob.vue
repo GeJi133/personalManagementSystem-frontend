@@ -1,6 +1,6 @@
 <template>
     <div class="page">
-        <h1 class="page-title">部门详情</h1>
+        <h1 class="page-title">岗位详情</h1>
         <b-row>
             <b-col xs="12" lg="8">
 

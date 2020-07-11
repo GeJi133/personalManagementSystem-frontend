@@ -1,9 +1,10 @@
 import request from '@/util/request'
 
 import Qs from 'qs'
-export function getDepartment(dno) {
+
+export function getJob(jno) {
     return request({
-        url: '/departments/' + dno+'?type=dno',
+        url: '/jobs/' + jno+'?type=jno',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),
@@ -12,9 +13,9 @@ export function getDepartment(dno) {
     })
 }
 
-export function getDepartments() {
+export function getJobs(dno) {
     return request({
-        url: '/departments/',
+        url: '/jobs/',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),
@@ -22,36 +23,39 @@ export function getDepartments() {
         // },
     })
 }
-export function updateDepartment(department) {
-    console.log("department",department);
+
+export function updateJob(job) {
     return request({
-        url: '/departments/',
+        url: '/jobs/',
         method: 'put',
         headers: {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
-        data:department,
+        data:job
     })
 }
 
-export function addDepartment(department) {
-    console.log("add了");
+export function addJob(job) {
+    console.log("job",job)
     return request({
-        url: '/departments/',
+        url: '/jobs/',
         method: 'post',
         headers: {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
-        data:department
+        data:job
     })
 }
-export function deleteDepartment(dno) {
+
+export function deleteJob(jno) {
+
     return request({
-        url: '/departments/',
+        url: '/jobs/',
         method: 'delete',
         headers: {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
-        data:dno
+        data:jno
     })
 }
+

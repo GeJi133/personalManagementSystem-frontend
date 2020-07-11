@@ -9,99 +9,265 @@
                 close collapse settings customHeader
         >
             <b-row>
-                <b-col lg="3" xs="12">
-                    <h5 class="m-t-1">部门名</h5>
-                    <p>部门简介：There are few position options available for notifications. You can click any of
-                        them
-                        to change notifications position:</p>
-                    <div class="location-selector">
-                        <div
-                                class="bit top left" @click="toggleLocation('top-left')"
-                        />
-                        <div
-                                class="bit top right" @click="toggleLocation('top-right')"
-                        />
-                        <div
-                                class="bit top" @click="toggleLocation('top-center')"
-                        />
-                        <div
-                                class="bit bottom left" @click="toggleLocation('bottom-left')"
-                        />
-                        <div
-                                class="bit bottom right" @click="toggleLocation('bottom-right')"
-                        />
-                        <div
-                                class="bit bottom" @click="toggleLocation('bottom-center')"
-                        />
-                    </div>
+                <b-col lg="5" xs="12">
+                    <h5 class="m-t-1">{{department.department}}</h5>
+                    <p>部门简介：{{department.business}}</p>
+                    <h5 class="m-t-1">部门经理</h5>
+                    <p>{{department.manager}}</p>
                 </b-col>
-                <b-col lg="4" xs="12">
+
+                <b-col lg="6" xs="12">
                     <h5 class="m-t-1">Notification Types</h5>
                     <p>Different types of notifications for lots of use cases. Custom classes are also
                         supported.</p>
-                    <p><b-button variant="info" id="show-info-message" @click="addInfoNotification">Info
-                        Message</b-button></p>
-                    <p><b-button variant="danger" id="show-error-message" @click="addErrorNotification">Error
-                        Message</b-button></p>
-                    <p><b-button
-                            variant="success" id="show-success-message" @click="addSuccessNotification"
-                    >Success Message</b-button></p>
+                    <div>
+                        <b-button size="sm"    class="auth-btn mb-3 blue-button"  v-b-modal.modal-1>添加岗位</b-button>
+
+                        <b-modal id="modal-1"  title="添加新部门">
+                            <!--            <Widget class="widget-auth mx-auto" title="<h3 class='mt-0'>Login to your Web App</h3>" customHeader>-->
+                            <p class="widget-auth-info">
+                                修改部门基本信息.
+                            </p>
+                            <form class="mt" ref="form" @submit.stop.prevent="manage(this.department.dno)">
+                                <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
+                                    {{errorMessage}}
+                                </b-alert>
+                                <div class="form-group">
+                                    <input class="form-control no-border" v-model="department.department" placeholder="部门名" />
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control no-border" v-model="department.description" placeholder="部门名" />
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control no-border" v-model="department.manage" placeholder="经理" />
+                                </div>
+
+                                <p class="widget-auth-info">or sign in with</p>
+                                <div class="social-buttons">
+                                </div>
+                            </form>
+                            <p class="widget-auth-info">
+                                Don't have an account? Sign up now!
+                            </p>
+                            <router-link class="d-block text-center" to="login">Create an Account</router-link>
+                            <!--            </Widget>-->
+
+                        </b-modal>
+                    </div>
+                    <div>
+                        <b-button size="sm"    class="auth-btn mb-3 green-button"  v-b-modal.modal-2>修改信息</b-button>
+
+                        <b-modal id="modal-2"title="修改部门信息">
+
+                            <!--            <Widget class="widget-auth mx-auto" title="<h3 class='mt-0'>Login to your Web App</h3>" customHeader>-->
+                            <p class="widget-auth-info">
+                                修改部门基本信息.
+                            </p>
+                            <form class="mt" ref="form" @submit.stop.prevent="manage(this.department.dno)">
+                                <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
+                                    {{errorMessage}}
+                                </b-alert>
+                                <div class="form-group">
+                                    <input class="form-control no-border" v-model="department.department" placeholder="部门名" />
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control no-border" v-model="department.description" placeholder="部门名" />
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control no-border" v-model="department.manage" placeholder="经理" />
+                                </div>
+                                <p class="widget-auth-info">or sign in with</p>
+                                <div class="social-buttons">
+                                </div>
+                            </form>
+                            <p class="widget-auth-info">
+                                Don't have an account? Sign up now!
+                            </p>
+                            <router-link class="d-block text-center" to="login">Create an Account</router-link>
+                            <!--            </Widget>-->
+                        </b-modal>
+                    </div>
+                    <b-button class="light-blue-button" @click="showMsgBoxOne">删除岗位</b-button>
                 </b-col>
             </b-row>
         </Widget>
             </b-col>
-        <b-col xs="12" lg="4">
-            <Widget
-                    title="<h5>Highcharts <span class='fw-semi-bold'>Live Chart</span></h5>"
-                    close collapse customHeader
-            >
-                <highcharts :options="ld" ref="highchart"></highcharts>
-            </Widget>
-        </b-col> </b-row>
+<!--        <b-col xs="12" lg="4">-->
+<!--            <Widget-->
+<!--                    title="<h5>Highcharts <span class='fw-semi-bold'>Live Chart</span></h5>"-->
+<!--                    close collapse customHeader-->
+<!--            >-->
+<!--                <highcharts :options="ld" ref="highchart"></highcharts>-->
+<!--            </Widget>-->
+<!--        </b-col>-->
+        </b-row>
+        <b-row>
+            <b-col>
+                <Widget
+                        title="<h5>Table <span class='fw-semi-bold'>Styles</span></h5>"
+                        customHeader settings close
+                >
+                    <div class="table-resposive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="hidden-sm-down">岗位编号</th>
+                                <th>所属部门</th>
+                                <th>job</th>
+                                <th class="hidden-sm-down">描述</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="job in jobList" :key="job.jno">
+                                <td><a href="#" @click="viewJob(job.dno)">{{job.dno}}</a></td>
+                                <td>
+                                    <a href="#" @click="viewJob(job.dno)">{{job.dno}}</a>
+                                </td>
+                                <td class="text-semi-muted">
+                                    {{job.job}}
+                                </td>
+                                <td>
+                                    <p class="mb-0">
+                                        <small>
+                                            <span class="fw-semi-bold" >描述:</span>
+                                            <span class="text-muted">&nbsp; {{job.description}}</span>
+                                        </small>
+                                    </p>
+                                    <p>
+                                        <small>
+                                            <span class="fw-semi-bold">Dimensions:</span>
+                                            <span class="text-muted">&nbsp; ll</span>
+                                        </small>
+                                    </p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
+                    <div class="clearfix">
+                        <div class="float-right">
+                            <b-button variant="default" class="mr-xs" size="sm">Send to...</b-button>
+                            <b-dropdown variant="inverse" class="mr-xs" size="sm" text="Clear" right>
+                                <b-dropdown-item>Clear</b-dropdown-item>
+                                <b-dropdown-item>Move ...</b-dropdown-item>
+                                <b-dropdown-item>Something else here</b-dropdown-item>
+                                <b-dropdown-divider />
+                                <b-dropdown-item>Separated link</b-dropdown-item>
+                            </b-dropdown>
+                        </div>
+                        <p>Basic table with styled content</p>
+                    </div>
+                </Widget>
+            </b-col>
+        </b-row>
     </div>
 </template>
 
 <script>
-    import Widget from '@/components/Widget/Widget';
+    // import Widget from '@/components/Widget/Widget';
+    //
+    // import BigStat from '@/pages/Dashboard/components/BigStat/BigStat';
+    //
+    // import ECharts from 'vue-echarts/components/ECharts';
+    // import 'echarts/lib/chart/line';
+    // import 'echarts/lib/chart/themeRiver';
+    // import 'echarts/lib/component/tooltip';
+    // import 'echarts/lib/component/legend';
 
-    import BigStat from '@/pages/Dashboard/components/BigStat/BigStat';
+    // import Highcharts from 'highcharts';
+    // import exporting from 'highcharts/modules/exporting';
+    // import exportData from 'highcharts/modules/export-data';
 
-    import ECharts from 'vue-echarts/components/ECharts';
-    import 'echarts/lib/chart/line';
-    import 'echarts/lib/chart/themeRiver';
-    import 'echarts/lib/component/tooltip';
-    import 'echarts/lib/component/legend';
-
-    import Highcharts from 'highcharts';
-    import exporting from 'highcharts/modules/exporting';
-    import exportData from 'highcharts/modules/export-data';
-
-    exporting(Highcharts);
-    exportData(Highcharts);
-    import Sparklines from '@/components/Sparklines/Sparklines'
-
-    import { Chart } from  'highcharts-vue';
-    import mock from '@/pages/Charts/mock';
-    import {chartData, liveChart} from "../../../pages/Charts/mock";
+    // exporting(Highcharts);
+    // exportData(Highcharts);
+    // import Sparklines from '@/components/Sparklines/Sparklines'
+    //
+    // import { Chart } from  'highcharts-vue';
+    //
+    // import {department} from './department';
+    // import { liveChart} from "../../../pages/Charts/mock";
 
     export default {
         name: 'viewDepartment',
         components: {
-            Widget, BigStat,highcharts: Chart,echart: ECharts,Sparklines
+            // Widget, BigStat,highcharts: Chart,echart: ECharts,Sparklines
         },
+
+
         data() {
             return {
-                cd: chartData,
-                ld: liveChart,
-                initEchartsOptions: {
-                    renderer: 'canvas'
-                },
-                mock
+                // cd: department,
+                // ld: liveChart,
+                // initEchartsOptions: {
+                //     renderer: 'canvas'
+                // },
+                // jobList:department.jobList,
+                department:[],
+                jobList:[]
+
             };
         },
+        created(){
+            this.department=this.$route.query.department;
+            console.log(this.department);
+            // this.department=this.department.findIndex(0);
+            console.log("departmenr",this.department);
+
+            // this.loading=true;
+            // console.log("执行了这个请求");
+            // this.$store.dispatch("GetJobs",this.department.dno).then(response=>{
+            //     console.log("这里之情了")
+            //     status=response.data.code;
+            //     this.loading=false;
+            //     console.log(response.data.code);
+            //
+            //     if(status==200){
+            //         this.jobList=response.data.data;
+            //     }
+            //
+            //     else{
+            //         console.log("请求出错");
+            //         alert("请求出错");
+            //     }
+            // })
+
+
+        },
         methods: {
-            // getRandomData() {
+            viewJob(dno){
+                console.log(dno);
+                // alert("dhjakdhk");
+                this.$router.push({
+                    path: "/manage/viewJob",
+                    query: { message: "response.data.message" }
+                });
+            },
+            handlOk(dno){
+                bvModalEvt.preventDefault();
+                this.manage(dno);
+            },
+            manage(dno){
+                this.$nextTick()
+            },
+            addJob(dno){
+
+            },
+            deleteDepartment(dno){
+
+            },
+            showMsgBoxOne() {
+                this.boxOne = ''
+                this.$bvModal.msgBoxOk('Action completed')
+                    .then(value => {
+
+                    })
+                    .catch(err => {
+                        // An error occurred
+                    })
+            },
+
+        // getRandomData() {
             //     const arr = [];
             //
             //     for (let i = 0; i < 25; i += 1) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-wrstaffer" >
+  <div class="sidebar-wrstaffer">
     <nav
         :class="{sidebar: true, sidebarStatic, sidebarOpened}"
         @mouseenter="sidebarMouseEnter"
@@ -20,13 +20,29 @@
 
         <NavLink
                 :activeItem="activeItem"
-                header="员工操作"
+                header="基本信息查询"
                 link="/staff/components"
                 iconName="flaticon-network"
                 index="components"
                 :childrenLinks="[
-              { header: '员工信息', link: '/staff/performance' },
-
+              { header: '绩效', link: '/staff/performance' },
+              { header: '工资', link: '/staff/salary' },
+            ]"
+        />
+        <NavLink
+            :activeItem="activeItem"
+            header="Components"
+            link="/app/components"
+            iconName="flaticon-network"
+            index="components"
+            :childrenLinks="[
+              { header: 'Charts', link: '/staff/components/charts' },
+              { header: 'Icons', link: '/staff/components/icons' },
+              { header: 'Maps', link: '/staff/components/maps' },
+              {header:'Notifications',link:'/staff/notifications'},
+              {header:'Tables Basic',link: '/staff/tables'},
+              {header:'Typography',link: '/staff/typography'},
+              {header:'DashBoard',link: '/staff/dashboard'}
             ]"
         />
       </ul>
