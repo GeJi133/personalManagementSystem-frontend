@@ -1,0 +1,91 @@
+/**
+ * Customized version of bootstrap using variables from _variables.scss.
+ * This file is loaded via separate loader thus allowing to use original bootstrap classes (e.g. .btn-default) through out the app.
+ */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800');
+
+@import '../../node_modules/bootstrap/scss/functions';
+@import 'variables';
+@import 'theme-variables';
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
+@import '../../node_modules/glyphicons-halflings/scss/glyphicons-halflings';
+@import '../../node_modules/font-awesome/css/font-awesome.css';
+@import '../../node_modules/line-awesome/dist/line-awesome/css/line-awesome.css';
+@import '../../node_modules/rickshaw/rickshaw.css';
+@import '../fonts/flaticon/flaticon';
+@import '../../node_modules/animate.css/animate';
+@import '../../node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox';
+@import 'mixins';
+@import 'base';
+@import 'auth';
+@import 'overrides';
+@import 'general';
+@import 'utils';
+.modal-body{
+  font-family: "AaFangMeng";
+  background: white;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.modal-header{
+  border-bottom: white;
+}
+.modal-footer{
+  border-top: white;
+}
+.form{
+  font-family: "AaFangMeng";
+  background: white;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.dashboard-page{
+  font-family: AaFangMeng;
+}
+body{
+  font-family: AaFangMeng;
+}
+.table th, .table td {
+  border: 0px ;
+  color: #3c484f;
+  padding-top: 20px;
+}
+.table{
+  padding-top: 20px ;
+}
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+  position: relative;
+  width: 100%;
+  padding-right: 8px;
+  padding-left: 8px;
+  padding-bottom: 2px;
+}
+button{
+  font-family: "Franklin Gothic";
+  color: white;
+}
+.blue-button{
+  background: #67aad7;
+  border: 0px;
+}
+.green-button{
+  background: #9aeed3;
+  border: 0px;
+}
+.light-blue-button{
+  background: #b9ddee;
+  border: 0px;
+}
+.green-button:hover{
+  background: #4cc19f;
+  border: 0px;
+}
+.blue-button:hover{
+  background: #62a0d5;
+  border: 0px;
+}
+.light-blue-button:hover{
+  background: #7dbad5;
+  border: 0px;
+}

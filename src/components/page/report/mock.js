@@ -1,0 +1,62 @@
+export default {
+    departmentReportList:[
+
+    {
+        dno:"1",
+        leavingStaff:[
+            {
+                leavingId:"1",
+                id:"1",
+                department:"人事部",
+                leavinftime:"2020.3.1",
+                leavinfreason:"****",
+            },
+            {
+                leavingId:"1",
+                id:"1",
+                department:"人事部",
+                leavinftime:"2020.3.1",
+                leavinfreason:"****",
+            },
+        ],
+        entryStadff:[
+            {
+                leavingId:"1",
+                id:"1",
+                department:"人事部",
+                leavinftime:"2020.3.1",
+                leavinfreason:"****",
+            },
+            {
+                leavingId:"1",
+                id:"1",
+                department:"人事部",
+                leavinftime:"2020.3.1",
+                leavinfreason:"****",
+            }
+        ]
+    },
+    {
+        dno:"2",
+        entryStaff:[
+            {
+                leavingId:"1",
+                id:"1",
+                department:"人事部",
+                leavinftime:"2020.3.1",
+                leavinfreason:"****",
+            }
+        ],
+        leavingStaff: [
+            {
+                leavingId:"1",
+                id:"1",
+                department:"人事部",
+                leavinftime:"2020.3.1",
+                leavinfreason:"****",
+            }
+        ]
+    }
+],
+
+}
