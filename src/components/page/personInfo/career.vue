@@ -14,7 +14,7 @@
                         <span class="glyphicon glyphicon-plus-sign" />
                         <h8 class="fw-semi-bold">新增职业生涯信息</h8>
                     </b-col>
-                    <b-modal @ok="handleOk(career)" :id="`modal-3`"  title="新增">
+                    <b-modal @ok="handleOk" :id="`modal-3`"  title="新增">
                         <p class="widget-auth-info">
                             请输入新增信息：
                         </p>
@@ -63,7 +63,7 @@
                                 </td>
                             </tr>
 
-                            <b-modal @ok="handleOk(career)" id="modal-2"  title="修改">
+                            <b-modal @ok="handleOk1" id="modal-2"  title="修改">
                                 <p class="widget-auth-info">
                                     请输入修改信息：
                                 </p>
@@ -87,21 +87,86 @@
 
 
 <script>
-    import Widget from '@/components/Widget/Widget';
-    import BigStat from '@/pages/Dashboard/components/BigStat/BigStat';
-    import { Chart } from  'highcharts-vue';
+   // import Widget from '@/components/Widget/Widget';
+    //import BigStat from '@/pages/Dashboard/components/BigStat/BigStat';
+    //import { Chart } from  'highcharts-vue';
     import mock from '@/components/page/personInfo/mock';
 
     export default {
         name: "career",
         components: {
-            Widget, BigStat,highcharts: Chart
+            //Widget, BigStat,highcharts: Chart
         },
         data() {
             return {
-                mock
+                mock,
+                career:[],
+
             };
         },
+        mounted() {
+            this.flush();
+        },
+
+        methods:{
+            handleOk(career){
+                console.log("执行了这个请求");
+                this.$store
+                    .dispatch("AddDepartment", this.addDepartment)
+                    .then(response => {
+                        console.log("这里执行了");
+                        console.log(response);
+                        status = response.data.code;
+                        // this.loading=false;
+                        console.log(response.data.code);
+                        if (status == 204) {
+                            this.flush();
+                            alert("添加成功");
+                        } else {
+                            console.log("请求出错");
+                            alert("请求出错");
+                        }
+                    });
+            },
+
+            handleOk1(career){
+                console.log("执行了这个请求");
+                this.$store
+                    .dispatch("UpdateDepartment", department)
+                    .then(response => {
+                        console.log("这里之情了");
+                        console.log(response);
+                        status = response.data.code;
+                        // this.loading=false;
+                        console.log(response.data.code);
+                        if (status == 204) {
+                            this.flush();
+                            alert("请求成功");
+                        } else {
+                            console.log("请求出错");
+                            alert("请求出错");
+                        }
+                    });
+            },
+
+            flush() {
+                this.loading = true;
+                console.log("执行了这个请求");
+                this.$store.dispatch("GetDepartments").then(response => {
+                    console.log("这里之情了");
+                    status = response.data.code;
+                    this.loading = false;
+                    console.log(response.data.code);
+
+                    if (status == 200) {
+                        this.departments = response.data.data;
+                    } else {
+                        console.log("请求出错");
+                        alert("请求出错");
+                    }
+                });
+            },
+        }
     }
 </script>
 
