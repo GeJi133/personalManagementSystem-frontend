@@ -53,19 +53,6 @@
 
             ]"
         />
-
-          <NavLink
-                  :activeItem="activeItem"
-                  header="员工考核"
-                  link="/manage/components"
-                  iconName="flaticon-network"
-                  index="components"
-                  :childrenLinks="[
-              { header: '考勤情况', link: '/manage/checkingIn' },
-              { header: '工资结算', link: '/manage/salary' },
-              //{ header: '家庭及社会关系', link: '/manage/family' },
-            ]"
-          />
           <NavLink
                   :activeItem="activeItem"
                   header="岗位管理"
