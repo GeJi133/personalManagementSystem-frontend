@@ -10,14 +10,10 @@
         >
             <b-row>
                 <b-col lg="5" xs="12">
-                    <h5 class="m-t-1">部门名</h5>
-                    <p>部门简介：There are few position options available for notifications. You can click any of
-                        them
-                        to change notifications position:</p>
+                    <h5 class="m-t-1">{{department.department}}</h5>
+                    <p>部门简介：{{department.business}}</p>
                     <h5 class="m-t-1">部门经理</h5>
-                    <p>部门简介：There are few position options available for notifications. You can click any of
-                        them
-                        to change notifications position:</p>
+                    <p>{{department.manager}}</p>
                 </b-col>
 
                 <b-col lg="6" xs="12">
@@ -96,14 +92,14 @@
             </b-row>
         </Widget>
             </b-col>
-        <b-col xs="12" lg="4">
-            <Widget
-                    title="<h5>Highcharts <span class='fw-semi-bold'>Live Chart</span></h5>"
-                    close collapse customHeader
-            >
-                <highcharts :options="ld" ref="highchart"></highcharts>
-            </Widget>
-        </b-col>
+<!--        <b-col xs="12" lg="4">-->
+<!--            <Widget-->
+<!--                    title="<h5>Highcharts <span class='fw-semi-bold'>Live Chart</span></h5>"-->
+<!--                    close collapse customHeader-->
+<!--            >-->
+<!--                <highcharts :options="ld" ref="highchart"></highcharts>-->
+<!--            </Widget>-->
+<!--        </b-col>-->
         </b-row>
         <b-row>
             <b-col>
@@ -169,44 +165,74 @@
 </template>
 
 <script>
-    import Widget from '@/components/Widget/Widget';
+    // import Widget from '@/components/Widget/Widget';
+    //
+    // import BigStat from '@/pages/Dashboard/components/BigStat/BigStat';
+    //
+    // import ECharts from 'vue-echarts/components/ECharts';
+    // import 'echarts/lib/chart/line';
+    // import 'echarts/lib/chart/themeRiver';
+    // import 'echarts/lib/component/tooltip';
+    // import 'echarts/lib/component/legend';
 
-    import BigStat from '@/pages/Dashboard/components/BigStat/BigStat';
+    // import Highcharts from 'highcharts';
+    // import exporting from 'highcharts/modules/exporting';
+    // import exportData from 'highcharts/modules/export-data';
 
-    import ECharts from 'vue-echarts/components/ECharts';
-    import 'echarts/lib/chart/line';
-    import 'echarts/lib/chart/themeRiver';
-    import 'echarts/lib/component/tooltip';
-    import 'echarts/lib/component/legend';
-
-    import Highcharts from 'highcharts';
-    import exporting from 'highcharts/modules/exporting';
-    import exportData from 'highcharts/modules/export-data';
-
-    exporting(Highcharts);
-    exportData(Highcharts);
-    import Sparklines from '@/components/Sparklines/Sparklines'
-
-    import { Chart } from  'highcharts-vue';
-
-    import {department} from './department';
-    import { liveChart} from "../../../pages/Charts/mock";
+    // exporting(Highcharts);
+    // exportData(Highcharts);
+    // import Sparklines from '@/components/Sparklines/Sparklines'
+    //
+    // import { Chart } from  'highcharts-vue';
+    //
+    // import {department} from './department';
+    // import { liveChart} from "../../../pages/Charts/mock";
 
     export default {
         name: 'viewDepartment',
         components: {
-            Widget, BigStat,highcharts: Chart,echart: ECharts,Sparklines
+            // Widget, BigStat,highcharts: Chart,echart: ECharts,Sparklines
         },
+
+
         data() {
             return {
-                cd: department,
-                ld: liveChart,
-                initEchartsOptions: {
-                    renderer: 'canvas'
-                },
-                jobList:department.jobList,
-                department:department.department
+                // cd: department,
+                // ld: liveChart,
+                // initEchartsOptions: {
+                //     renderer: 'canvas'
+                // },
+                // jobList:department.jobList,
+                department:[],
+                jobList:[]
+
             };
+        },
+        created(){
+            this.department=this.$route.query.department;
+            console.log(this.department);
+            // this.department=this.department.findIndex(0);
+            console.log("departmenr",this.department);
+
+            // this.loading=true;
+            // console.log("执行了这个请求");
+            // this.$store.dispatch("GetJobs",this.department.dno).then(response=>{
+            //     console.log("这里之情了")
+            //     status=response.data.code;
+            //     this.loading=false;
+            //     console.log(response.data.code);
+            //
+            //     if(status==200){
+            //         this.jobList=response.data.data;
+            //     }
+            //
+            //     else{
+            //         console.log("请求出错");
+            //         alert("请求出错");
+            //     }
+            // })
+
+
         },
         methods: {
             viewJob(dno){

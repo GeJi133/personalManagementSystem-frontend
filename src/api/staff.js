@@ -1,5 +1,5 @@
 /* eslint-disable */
-import request from '@/utils/request'
+import request from '@/util/request'
 
 import Qs from 'qs'
 export function getStaff(staffId) {
