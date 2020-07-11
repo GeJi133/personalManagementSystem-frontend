@@ -54,6 +54,8 @@ import staff from '@/components/Layout/staff';
 import staffSalary from '@/components/staff/basicInfo/salary';
 import staffPerformance from '@/components/staff/basicInfo/performance';
 import staffMain from '@/components/staff/main';
+import leavestaff from "./components/staff/basicInfo/leavestaff";
+import movepost from "./components/staff/basicInfo/movepost";
 
 
 Vue.use(Router);
@@ -270,23 +272,33 @@ export default new Router({
       name: 'staff',
       component: staff,
       children: [
-        {
-          path: 'main',
-          name: 'main',
-          component: staffMain,
-        },
-        {
-          path: 'salary',
-          name: 'salary',
-          component: staffSalary,
-        },
-        {
-          path: 'performance',
-          name: 'performance',
-          component: staffPerformance,
-        },
+    {
+        path: 'main',
+        name: 'main',
+        component: staffMain,
+    },
+    {
+        path: 'salary',
+        name: 'salary',
+        component: staffSalary,
+    },
+    {
+        path: 'performance',
+        name: 'performance',
+        component: staffPerformance,
+    },
+    {
+        path: 'leavestaff',
+        name: 'leavestaff',
+        component: leavestaff,
+    },
+    {
+        path: 'movepost',
+        name: 'movepost',
+        component: movepost,
+    },
 
-      ],
+],
     },
   ],
 });

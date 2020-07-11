@@ -214,7 +214,7 @@
                 console.log(dno);
                 // alert("dhjakdhk");
                 this.$router.push({
-                    path: "/manage/viewJob",
+                    path: "/app/viewJob",
                     query: { message: "response.data.message" }
                 });
             },
@@ -222,6 +222,7 @@
                 bvModalEvt.preventDefault();
                 this.manage(dno);
             },
+          // eslint-disable-next-line no-unused-vars
             manage(dno){
                 this.$nextTick()
             },

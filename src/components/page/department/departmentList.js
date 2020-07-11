@@ -43,12 +43,12 @@ export default {
     departmentList: [
         {
             dno: '1',
-            department: 'Mark Otto',
+            department: '马鑫',
             business: 'ottoto@wxample.com',
             manage:'jfksl'
         },
         {
-            dno: '1',
+            dno: '2',
             department: 'Jacob Thornton',
             business: 'thornton@wxample.com',
             manage:'jfksl'
