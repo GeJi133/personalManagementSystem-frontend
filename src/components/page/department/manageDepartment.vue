@@ -8,6 +8,7 @@
                         title="<h6>  </h6>"
                         close collapse settings customHeader
                 >
+                
                     <b-row>
                         <b-col lg="5" xs="12">
                             <h5 class="m-t-1">部门名</h5>

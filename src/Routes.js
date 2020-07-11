@@ -7,6 +7,7 @@ import Layout from '@/components/Layout/Layout';
 import resetPassword from '@/components/page/account/resetPassword';
 import viewDepartment from '@/components/page/department/viewDepartment';
 import departmentList from '@/components/page/department/departmentList.vue';
+import jobList from '@/components/page/department/jobList.vue';
 import manageDepartment from '@/components/page/department/manageDepartment.vue';
 import ErrorPage from '@/pages/Error/Error';
 // Core
@@ -171,6 +172,11 @@ export default new Router({
           path: 'departmentList',
           name: 'departmentList',
           component: departmentList,
+        },
+        {
+          path: 'jobList',
+          name: 'jobList',
+          component: jobList,
         },
         {
           path: 'manageDepartment',

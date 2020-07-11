@@ -8,8 +8,8 @@ export default {
       secondary: "#798892",
       success: "#6adcc1",
       info: "#1d79b8",
-      warning: "#68e2de",
-      danger: "#c2fceb",
+      warning: "#FFFF00",
+      danger: "#FF0000",
       inverse: "#002B49",
       textColor: "#495057",
       gray: "#D7DFE6"

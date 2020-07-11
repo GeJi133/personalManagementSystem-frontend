@@ -28,7 +28,6 @@
                                 Message</b-button></p>
                             <b-modal id="modal-1"  title="修改岗位信息">
                                 <!--            <Widget class="widget-auth mx-auto" title="<h3 class='mt-0'>Login to your Web App</h3>" customHeader>-->
-
                                 <p class="widget-auth-info">
                                     修改岗位基本信息.
                                 </p>

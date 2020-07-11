@@ -1,104 +1,48 @@
 <template>
-  <div class="sidebar-wrmanageer">
+  <div class="sidebar-wrstaffer">
     <nav
         :class="{sidebar: true, sidebarStatic, sidebarOpened}"
         @mouseenter="sidebarMouseEnter"
         @mouseleave="sidebarMouseLeave"
     >
       <header class="logo">
-        <router-link to="/manage"><span class="primary-word">Sing</span> manage</router-link>
+        <router-link to="/staff"><span class="primary-word">Sing</span> staff</router-link>
       </header>
       <ul class="nav">
         <NavLink
             :activeItem="activeItem"
             header="主页"
-            link="/manage/dashboard"
+            link="/staff/main"
             iconName="flaticon-home"
             index="dashboard"
             isHeader
         />
-        <NavLink
-                :activeItem="activeItem"
-                header="员工管理"
-                link="/manage/components"
-                iconName="flaticon-network"
-                index="components"
-                :childrenLinks="[
-              { header: '职业生涯', link: '/manage/career' },
-              { header: '外语能力', link: '/manage/language' },
-              { header: '家庭及社会关系', link: '/manage/family' },
-            ]"
-        />
-        <NavLink
-                :activeItem="activeItem"
-                header="员工考核"
-                link="/manage/components"
-                iconName="flaticon-network"
-                index="components"
-                :childrenLinks="[
-              { header: '考勤情况', link: '/manage/checkingIn' },
-              { header: '工资结算', link: '/manage/salary' },
-              //{ header: '家庭及社会关系', link: '/manage/family' },
-            ]"
-        />
-        <NavLink
-                :activeItem="activeItem"
-                header="岗位管理"
-                link="/manage/components"
-                iconName="flaticon-network"
-                index="components"
-                :childrenLinks="[
-              { header: '部门查看', link: '/manage/departmentList' },
-              { header: '岗位查看', link: '/manage/jobList' },
-
-            ]"
-        />
 
         <NavLink
                 :activeItem="activeItem"
-                header="人事管理"
-                link="/manage/components"
+                header="基本信息查询"
+                link="/staff/components"
                 iconName="flaticon-network"
                 index="components"
                 :childrenLinks="[
-              { header: '员工入职管理', link: '/manage/jobgetcontrol' },
-              { header: '试用期管理', link: '/manage/confimationcontrol' },
-              { header: '部门调动管理', link: '/manage/departmentmove' },
-              { header: '岗位调动管理', link: '/manage/postmove' },
-              { header: '员工离职管理', link: '/manage/staffover' },
+              { header: '绩效', link: '/staff/performance' },
+              { header: '工资', link: '/staff/salary' },
             ]"
         />
-
-        <NavLink
-                :activeItem="activeItem"
-                header="报表管理"
-                link="/manage/components"
-                iconName="flaticon-network"
-                index="components"
-                :childrenLinks="[
-              { header: '离职月表', link: '/manage/dimission' },
-              { header: '岗位调度月报', link: '/manage/departmentReport' },
-              { header: '职位调度月表', link: '/manage/jobReport' },
-              { header: '入职月表', link: '/manage/entry' },
-              { header: '人事月表', link: '/manage/personalReport' },
-            ]"
-        />
-
         <NavLink
             :activeItem="activeItem"
             header="Components"
-            link="/manage/components"
+            link="/app/components"
             iconName="flaticon-network"
             index="components"
             :childrenLinks="[
-              { header: 'Charts', link: '/manage/components/charts' },
-              { header: 'Icons', link: '/manage/components/icons' },
-              { header: 'Maps', link: '/manage/components/maps' },
-              {header:'Notifications',link:'/manage/notifications'},
-              {header:'Tables Basic',link: '/manage/tables'},
-              {header:'Typography',link: '/manage/typography'},
-              {header:'DashBoard',link: '/manage/dashboard'}
-
+              { header: 'Charts', link: '/staff/components/charts' },
+              { header: 'Icons', link: '/staff/components/icons' },
+              { header: 'Maps', link: '/staff/components/maps' },
+              {header:'Notifications',link:'/staff/notifications'},
+              {header:'Tables Basic',link: '/staff/tables'},
+              {header:'Typography',link: '/staff/typography'},
+              {header:'DashBoard',link: '/staff/dashboard'}
             ]"
         />
       </ul>
