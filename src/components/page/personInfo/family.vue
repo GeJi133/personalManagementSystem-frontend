@@ -31,7 +31,7 @@
                                 <td>{{row.price}}</td>
                                 <td>{{row.date}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-success">
+                                    <button type="button" class="btn btn-success" v-b-modal.modal-2>
                                         修改
                                     </button>
                                     <b-button type="button" variant="warning">
@@ -39,13 +39,42 @@
                                     </b-button>
                                 </td>
                             </tr>
+
+                            <b-modal @ok="handleOk(family)" id="modal-2"  title="修改">
+                                <p class="widget-auth-info">
+                                    请输入修改信息：
+                                </p>
+                                <form class="mt" @submit.prevent="login">
+                                    <div class="form-group">
+                                        <input class="form-control no-border" ref="family" required type="text" name="family" placeholder="家庭情况及社会关系" />
+                                    </div>
+                                </form>
+                            </b-modal>
+
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <div style="text-align:center">
-                                    <button type="button" class="btn btn-info">新增</button>
+                                    <button type="button" class="btn btn-info" v-b-modal.modal-3>
+                                        新增
+                                    </button>
                                 </div>
                             </tr>
+
+                            <b-modal @ok="handleOk(family)" id="modal-3"  title="新增">
+                                <p class="widget-auth-info">
+                                    请输入新增信息：
+                                </p>
+                                <form class="mt" @submit.prevent="login">
+                                    <div class="form-group">
+                                        <input class="form-control no-border" ref="id" required type="text" name="id" placeholder="工号" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control no-border" ref="family" required type="text" name="family" placeholder="家庭情况及社会关系" />
+                                    </div>
+                                </form>
+                            </b-modal>
+
                             </tbody>
                         </table>
                     </div>
