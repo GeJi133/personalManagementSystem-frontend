@@ -4,7 +4,7 @@ import Qs from 'qs'
 
 export function getLeaving() {
     return request({
-        url: '/reports/leaving',
+        url: '/reports/leavings',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),
@@ -14,7 +14,7 @@ export function getLeaving() {
 }
 export function getTransfer() {
     return request({
-        url: '/reports/leaving',
+        url: '/reports/transfers',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),
