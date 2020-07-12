@@ -5,10 +5,7 @@ export function getDepartment(dno) {
     return request({
         url: '/departments/' + dno+'?type=dno',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+
     })
 }
 

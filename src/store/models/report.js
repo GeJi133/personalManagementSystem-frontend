@@ -2,7 +2,7 @@ import {getLeaving} from '@/api/report'
 import {getTransfer} from '@/api/report'
 const report ={
     actions: {
-        GetLeaving({commit}){
+        GetDimission({commit}){
             return new Promise((resolve,reject)=>{
                 getLeaving().then(response=>{
                     commit('CHANGE');
@@ -14,7 +14,7 @@ const report ={
             })
         },
 
-        GetTransfer({commit}){
+        GetTransfers({commit}){
             return new Promise((resolve,reject)=>{
                 getTransfer().then(response=>{
                     commit('CHANGE');
