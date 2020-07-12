@@ -45,14 +45,14 @@
                             </thead>
                             <tbody>
                             <tr
-                                    v-for="row in mock.table"
-                                    :key="row.id"
+                                    v-for="employee in mock.table"
+                                    :key="employee.id"
                             >
-                                <td>{{row.name}}</td>
-                                <td>{{row.email}}</td>
-                                <td>{{row.product}}</td>
-                                <td>{{row.price}}</td>
-                                <td>{{row.date}}</td>
+                                <td>{{employee.id}}</td>
+                                <td>{{employee.name}}</td>
+                                <td>{{employee.sex}}</td>
+                                <td>{{employee.email}}</td>
+                                <td>{{employee.family}}</td>
                                 <td>
                                     <button type="button" class="btn btn-success" v-b-modal.modal-2>
                                         修改
@@ -101,6 +101,46 @@
             return {
                 mock
             };
+        },
+
+        handleOk(){
+            console.log("执行了这个请求");
+            this.$store
+                .dispatch("AddCareer", this.addemployee)
+                .then(response => {
+                    console.log("这里执行了");
+                    console.log(response);
+                    status = response.data.code;
+                    // this.loading=false;
+                    console.log(response.data.code);
+                    if (status == 204) {
+                        this.flush();
+                        alert("添加成功");
+                    } else {
+                        console.log("请求出错");
+                        alert("请求出错");
+                    }
+                });
+        },
+
+        handleOk1(){
+            console.log("执行了这个请求");
+            this.$store
+                .dispatch("UpdateDepartment", department)
+                .then(response => {
+                    console.log("这里执行了");
+                    console.log(response);
+                    status = response.data.code;
+                    // this.loading=false;
+                    console.log(response.data.code);
+                    if (status == 204) {
+                        this.flush();
+                        alert("请求成功");
+                    } else {
+                        console.log("请求出错");
+                        alert("请求出错");
+                    }
+                });
         },
     }
 </script>

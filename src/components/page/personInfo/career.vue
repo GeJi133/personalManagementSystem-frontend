@@ -18,15 +18,20 @@
                         <p class="widget-auth-info">
                             请输入新增信息：
                         </p>
-                        <form class="mt" @submit.prevent="login">
+                        <form class="mt" ref="form">
                             <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
                                 {{errorMessage}}
                             </b-alert>
                             <div class="form-group">
-                                <input class="form-control no-border" ref="id" required type="text" name="id" placeholder="工号" />
+                                <input class="form-control no-border"
+                                       @change="checkId()"
+                                       v-model="addCareer.id"
+                                       placeholder="工号" />
                             </div>
                             <div class="form-group">
-                                <input class="form-control no-border" ref="career" required type="text" name="career" placeholder="职业生涯" />
+                                <input class="form-control no-border"
+                                       v-model="addCareer.career"
+                                       placeholder="职业生涯" />
                             </div>
                         </form>
                     </b-modal>
@@ -45,34 +50,48 @@
                             </thead>
                             <tbody>
                             <tr
-                                    v-for="row in mock.table"
-                                    :key="row.id"
+                                    v-for="employee in mock.employee"
+                                    :key="employee.id"
                             >
-                                <td>{{row.name}}</td>
-                                <td>{{row.email}}</td>
-                                <td>{{row.product}}</td>
-                                <td>{{row.price}}</td>
-                                <td>{{row.date}}</td>
+                                <td>{{employee.id}}</td>
+                                <td>{{employee.name}}</td>
+                                <td>{{employee.sex}}</td>
+                                <td>{{employee.email}}</td>
+                                <td>{{employee.career}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-success" v-b-modal.modal-2>
+                                    <button type="button" class="btn btn-success"
+                                            v-b-modal="`model-2${employee.id}`">
                                         修改
                                     </button>
-                                    <button type="button" class="btn btn-warning" >
+
+                                    <b-modal @ok="handleOk1" :id="`model-2${employee.id}`"  title="修改">
+                                        <p class="widget-auth-info">
+                                            请输入修改信息：
+                                        </p>
+                                        <form class="mt" ref="form">
+                                            <div class="form-group">
+                                                <input class="form-control no-border"
+                                                       v-model="editCareer.career"
+                                                       placeholder="职业生涯" />
+                                            </div>
+                                        </form>
+                                    </b-modal>
+
+                                    <button type="button" class="btn btn-warning"
+                                            v-b-modal="`model-1${employee.id}`">
                                         删除
                                     </button>
+
+                                    <b-modal
+                                            @ok="deleteCareer(employee.id)"
+                                            :id="`model-1${employee.id}`"
+                                            title="提示"
+                                    >
+                                        <p class="widget-auth-info">确定要删除吗？</p>
+                                    </b-modal>
+
                                 </td>
                             </tr>
-
-                            <b-modal @ok="handleOk1" id="modal-2"  title="修改">
-                                <p class="widget-auth-info">
-                                    请输入修改信息：
-                                </p>
-                                <form class="mt" @submit.prevent="login">
-                                    <div class="form-group">
-                                        <input class="form-control no-border" ref="career" required type="text" name="career" placeholder="职业生涯" />
-                                    </div>
-                                </form>
-                            </b-modal>
 
                             </tbody>
                         </table>
@@ -100,19 +119,49 @@
         data() {
             return {
                 mock,
-                career:[],
+                careers:[],
+                addCareer:{},
+                editCareer:{},
+
 
             };
         },
+
         mounted() {
             this.flush();
         },
 
         methods:{
-            handleOk(career){
+
+            // viewCareer(careerId) {
+            //     console.log(careerId);
+            //     this.loading = true;
+            //     console.log("执行了这个请求");
+            //     this.$store.dispatch("GetDepartment", careerId).then(response => {
+            //         console.log("这里之情了");
+            //         status = response.data.code;
+            //         this.loading = false;
+            //         console.log(response.data.code);
+            //
+            //         if (status == 200) {
+            //             let department = response.data.data[0];
+            //             console.log("department", department);
+            //             // alert("dhjakdhk");
+            //             this.$router.push({
+            //                 path: "/manage/career",
+            //                 query: { department: department }
+            //             });
+            //         } else {
+            //             console.log("请求出错");
+            //             alert("请求出错");
+            //         }
+            //     });
+            // },
+
+            handleOk(){
                 console.log("执行了这个请求");
                 this.$store
-                    .dispatch("AddDepartment", this.addDepartment)
+                    .dispatch("AddCareer", this.addCareer)
                     .then(response => {
                         console.log("这里执行了");
                         console.log(response);
@@ -129,12 +178,12 @@
                     });
             },
 
-            handleOk1(career){
+            handleOk1(){
                 console.log("执行了这个请求");
                 this.$store
-                    .dispatch("UpdateDepartment", department)
+                    .dispatch("UpdateCareer", employee)
                     .then(response => {
-                        console.log("这里之情了");
+                        console.log("这里执行了");
                         console.log(response);
                         status = response.data.code;
                         // this.loading=false;
@@ -152,24 +201,69 @@
             flush() {
                 this.loading = true;
                 console.log("执行了这个请求");
-                this.$store.dispatch("GetDepartments").then(response => {
+                this.$store.dispatch("GetCareers").then(response => {
                     console.log("这里之情了");
                     status = response.data.code;
                     this.loading = false;
                     console.log(response.data.code);
 
                     if (status == 200) {
-                        this.departments = response.data.data;
+                        this.careers = response.data.data;
                     } else {
                         console.log("请求出错");
                         alert("请求出错");
                     }
                 });
             },
+
+            checkId() {
+                let id=this.addCareer.id;
+                console.log(addCareer);
+
+                this.loading = true;
+                console.log("执行了这个请求");
+                this.$store.dispatch("GetCareer", id).then(response => {
+                    console.log("这里执行了");
+                    status = response.data.code;
+
+                    this.loading = false;
+                    console.log(response.data.code);
+                    console.log(response.data.data);
+
+                    if (status == 200) {
+                        if (response.data.data.length == 0) {
+                            this.errorMessage = "该员工不存在";
+                            alert("工号不可用");
+                        }
+                        else {
+                            this.errorMessage = "该员工存在";
+                        }
+                    }
+                });
+            },
+
+            deleteCareer() {
+                console.log(id);
+                this.loading = true;
+                console.log("执行了这个请求");
+                this.$store.dispatch("DeleteCareer", id).then(response => {
+                    console.log("这里之情了");
+                    status = response.data.code;
+                    this.loading = false;
+                    console.log(response.data.code);
+                    console.log(response.data.data);
+
+                    if (status == 204) {
+                        alert("删除成功");
+                        this.flush();
+                    } else {
+                        alert("删除失败");
+                    }
+                });
+            }
         }
     }
 </script>
 
-<style scoped>
-
+<style>
 </style>

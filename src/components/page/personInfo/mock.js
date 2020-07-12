@@ -40,16 +40,18 @@ export default {
       },
     },
   ],
-  table: [
+  employee: [
     {
-      id: 0,
+      id: '0',
       name: 'Mark Otto',
       email: 'ottoto@wxample.com',
       product: 'ON the Road',
       price: '$25 224.2',
       date: '11 May 2017',
       city: 'Otsego',
-      status: 'Sent',
+      sex: 'male',
+      career: '曾就职于阿里巴巴、华为',
+      family: '已婚',
     },
     {
       id: 1,
@@ -59,7 +61,9 @@ export default {
       price: '$1 254.2',
       date: '4 Jun 2017',
       city: 'Fivepointville',
-      status: 'Sent',
+      sex: 'male',
+      career: '曾就职于阿里巴巴、华为',
+      family: '已婚',
     },
     {
       id: 2,
@@ -69,7 +73,9 @@ export default {
       price: '$1 570.0',
       date: '27 Aug 2017',
       city: 'Leadville North',
-      status: 'Pending',
+      sex: 'female',
+      career: '曾就职于阿里巴巴、华为',
+      family: '未婚',
     },
     {
       id: 3,
@@ -79,7 +85,9 @@ export default {
       price: '$5 224.5',
       date: '19 Feb 2018',
       city: 'Seaforth',
-      status: 'Declined',
+      sex: 'male',
+      career: '曾就职于阿里巴巴、华为',
+      family: '未婚',
     },
     {
       id: 4,
@@ -89,7 +97,9 @@ export default {
       price: '$43 594.7',
       date: '1 Mar 2018',
       city: 'Hanoverton',
-      status: 'Sent',
+      sex:'female',
+      career: '曾就职于阿里巴巴、华为',
+      family: '已婚',
     },
   ],
 };

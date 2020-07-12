@@ -18,7 +18,7 @@
                             <p class="widget-auth-info">
                                 请输入新增信息：
                             </p>
-                            <form class="mt" @submit.prevent="login">
+                            <form class="mt" >
                                 <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
                                     {{errorMessage}}
                                 </b-alert>
@@ -45,14 +45,14 @@
                             </thead>
                             <tbody>
                             <tr
-                                    v-for="row in mock.table"
-                                    :key="row.id"
+                                    v-for="employee in mock.table"
+                                    :key="employee.id"
                             >
-                                <td>{{row.name}}</td>
-                                <td>{{row.email}}</td>
-                                <td>{{row.product}}</td>
-                                <td>{{row.price}}</td>
-                                <td>{{row.date}}</td>
+                                <td>{{employee.id}}</td>
+                                <td>{{employee.name}}</td>
+                                <td>{{employee.sex}}</td>
+                                <td>{{employee.email}}</td>
+                                <td>{{employee.language}}</td>
                                 <td>
                                     <button type="button" class="btn btn-success" v-b-modal.modal-2>
                                         修改
