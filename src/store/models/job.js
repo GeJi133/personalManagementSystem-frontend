@@ -3,6 +3,7 @@ import {getDepartments} from '@/api/department'
 import {updateDepartment} from '@/api/department'
 import {deleteDepartment} from '@/api/department'
 import {addDepartment} from '@/api/department'
+import {getPersonListByJob} from "@/api/job";
 
 const job ={
     actions:{
@@ -52,6 +53,17 @@ const job ={
         DeleteDepartment({commit},dno){
             return new Promise((resolve,reject)=>{
                 deleteDepartment(dno).then(response=>{
+                    commit('CHANGE')
+                    console.log("responde",response)
+                    resolve(response)
+                }).catch(error=>{
+                    reject(error)
+                })
+            })
+        },
+        GetPersonListByJob({commit},jno){
+            return new Promise((resolve,reject)=>{
+                getPersonListByJob(jno).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)

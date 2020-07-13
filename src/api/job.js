@@ -13,7 +13,29 @@ export function getJob(jno) {
     })
 }
 
-export function getJobs(dno) {
+
+export function getJobsByDno(dno) {
+    return request({
+        url: 'departments/jobs/' + dno,
+        method: 'get',
+        // headers: {
+        // 'token': localStorage.getItem('token'),
+        // 'Content-Type': 'application/x-www-form-urlencoded'
+        // },
+    })
+}
+export function getPersonListByJob(jno) {
+    return request({
+        url: 'jobs/employees/' + jno,
+        method: 'get',
+        // headers: {
+        // 'token': localStorage.getItem('token'),
+        // 'Content-Type': 'application/x-www-form-urlencoded'
+        // },
+    })
+}
+
+export function getJobs() {
     return request({
         url: '/jobs/',
         method: 'get',

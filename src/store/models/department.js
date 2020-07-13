@@ -3,6 +3,7 @@ import {getJobs} from '@/api/job'
 import {updateJob} from '@/api/job'
 import {deleteJob} from '@/api/job'
 import {addJob} from '@/api/job'
+import  {getJobsByDno} from "@/api/job";
 
 const department ={
     actions:{
@@ -17,9 +18,20 @@ const department ={
                 })
             })
         },
-        GetJobs({commit},dno){
+        GetJobs({commit}){
             return new Promise((resolve,reject)=>{
-                getJobs(dno).then(response=>{
+                getJobs().then(response=>{
+                    commit('CHANGE')
+                    console.log("responde",response)
+                    resolve(response)
+                }).catch(error=>{
+                    reject(error)
+                })
+            })
+        },
+        GetJobsByDno({commit},dno){
+            return new Promise((resolve,reject)=>{
+                getJobsByDno(dno).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)
