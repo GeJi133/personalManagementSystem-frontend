@@ -5,7 +5,7 @@
         <b-row>
             <b-col xs="12">
                 <Widget
-                        title="<h5>Support <span class='fw-semi-bold'>Requests</span></h5>"
+                        title="<h5>Support <span class='fw-semi-bold'>考勤表</span></h5>"
                         bodyClass="widget-table-overflow"
                         customHeader
                 >
@@ -23,32 +23,45 @@
                             </thead>
                             <tbody>
                             <tr
-                                    v-for="row in mock.table"
-                                    :key="row.id"
+                                    v-for="employee in employees"
+                                    :key="employee.id"
                             >
-                                <td>{{row.name}}</td>
-                                <td>{{row.email}}</td>
-                                <td>{{row.product}}</td>
-                                <td>{{row.price}}</td>
-                                <td>{{row.date}}</td>
+                                <td><a href="#" @click="viewCheckingIn(employee.id)">{{employee.id}}</a></td>
+                                <td><a href="#" @click="viewCheckingIn(employee.id)">{{employee.name}}</a></td>
+                                <td><a href="#" @click="viewCheckingIn(employee.id)">{{employee.sex}}</a></td>
+                                <td><a href="#" @click="viewCheckingIn(employee.id)">{{employee.email}}</a></td>
+                                <td><a href="#" @click="viewCheckingIn(employee.id)">{{employee.career}}</a></td>
                                 <td>
-                                    <button type="button" class="btn btn-success" v-b-modal.modal-2>
+                                    <button type="button" class="btn btn-success"
+                                            v-b-modal="`model-1${employee.id}`">
                                         修改
                                     </button>
+
+                                    <b-modal @ok="handleOk(employee)" :id="`model-1${employee.id}`"  title="修改">
+                                        <p class="widget-auth-info">
+                                            请输入修改信息：
+                                        </p>
+                                        <form class="mt" ref="form">
+                                            <div class="form-group">
+                                                <input class="form-control no-border"
+                                                       v-model="editCheckingIn.attendtime"
+                                                       placeholder="上班打卡时间" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control no-border"
+                                                       v-model="editCheckingIn.leavetime"
+                                                       placeholder="下班打卡时间" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control no-border"
+                                                       @change="checkId()"
+                                                       v-model="editCheckingIn.id"
+                                                       placeholder="工号" />
+                                            </div>
+                                        </form>
+                                    </b-modal>
                                 </td>
                             </tr>
-
-                            <b-modal @ok="handleOk(checkingIn)" id="modal-2"  title="修改">
-                                <p class="widget-auth-info">
-                                    请输入修改信息：
-                                </p>
-                                <form class="mt" @submit.prevent="login">
-                                    <div class="form-group">
-                                        <input class="form-control no-border" ref="checkingIn" required type="text" name="checkingIn" placeholder="考勤" />
-                                    </div>
-                                </form>
-                            </b-modal>
-
                             </tbody>
                         </table>
                     </div>
@@ -72,13 +85,111 @@
     export default {
         name: "checkingIn",
         components: {
-            Widget, BigStat,highcharts: Chart
+           // Widget, BigStat,highcharts: Chart
         },
         data() {
             return {
-                mock
+                mock,
+                editCheckingIn:{},
+                employees:[],
+
+
             };
         },
+
+        mounted() {
+            this.flush();
+        },
+
+        methods:{
+            flush() {
+                this.loading = true;
+                console.log("执行了这个请求");
+                this.$store.dispatch("GetCheckingIns").then(response => {
+                    console.log("这里之情了");
+                    status = response.data.code;
+                    this.loading = false;
+                    console.log(response.data.code);
+
+                    if (status == 200) {
+                        this.careers = response.data.data;
+                    } else {
+                        console.log("请求出错");
+                        alert("请求出错");
+                    }
+                });
+            },
+
+            checkId() {
+                let id=this.editCheckingIn.id;
+                console.log(id);
+
+                this.loading = true;
+                console.log("执行了这个请求");
+                this.$store.dispatch("GetCheckingIn", id).then(response => {
+                    console.log("这里执行了");
+                    status = response.data.code;
+
+                    this.loading = false;
+                    console.log(response.data.code);
+                    console.log(response.data.data);
+
+                    if (status == 200) {
+                        if (response.data.data.length == 0) {
+                            this.errorMessage = "该员工不存在";
+                            alert("工号不可用");
+                        }
+                        else {
+                            this.errorMessage = "该员工存在";
+                        }
+                    }
+                });
+            },
+
+            viewCheckingIn(id) {
+                console.log();
+                this.loading = true;
+                console.log("执行了这个请求");
+                this.$store.dispatch("GetCheckingIn",id).then(response => {
+                    console.log("这里之情了");
+                    status = response.data.code;
+                    this.loading = false;
+                    console.log(response.data.code);
+
+                    if (status == 200) {
+                        let department = response.data.data[0];
+                        console.log("checkingIn", checkingIn);
+                        // alert("dhjakdhk");
+                        this.$router.push({
+                            path: "/manage/checkingIn",
+                            query: { CheckingIn: checkingIn }
+                        });
+                    } else {
+                        console.log("请求出错");
+                        alert("请求出错");
+                    }
+                });
+            },
+            handleOk(employee){
+                console.log("执行了这个请求");
+                this.$store
+                    .dispatch("UpdateCheckingIn",employee)
+                    .then(response => {
+                        console.log("这里执行了");
+                        console.log(response);
+                        status = response.data.code;
+                        // this.loading=false;
+                        console.log(response.data.code);
+                        if (status == 204) {
+                            this.flush();
+                            alert("请求成功");
+                        } else {
+                            console.log("请求出错");
+                            alert("请求出错");
+                        }
+                    });
+            },
+        }
     }
 </script>
 

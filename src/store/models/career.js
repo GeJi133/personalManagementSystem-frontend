@@ -28,9 +28,9 @@ const career={
                 })
             })
         },
-        UpdateCareer({commit},employee){
+        UpdateCareer({commit},career,id){
             return new Promise((resolve,reject)=>{
-                updateCareer(employee).then(response=>{
+                updateCareer(career,id).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)
@@ -39,9 +39,9 @@ const career={
                 })
             })
         },
-        DeleteCareer({commit},employee){
+        DeleteCareer({commit},id){
             return new Promise((resolve,reject)=>{
-                deleteCareer(employee).then(response=>{
+                deleteCareer(id).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)
@@ -50,9 +50,9 @@ const career={
                 })
             })
         },
-        AddCareer({commit},employee){
+        AddCareer({commit},id,career){
             return new Promise((resolve,reject)=>{
-                addCareer(employee).then(response=>{
+                addCareer(id,career).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)
