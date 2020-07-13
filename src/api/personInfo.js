@@ -90,7 +90,7 @@ export function updateFamily(employee) {
         header:{
             'Content-Type': 'application/JSON'
         },
-        data:family,
+        data:employee,
     })
 }
 
@@ -140,15 +140,15 @@ export function getLanguages() {
     })
 }
 
-export function updateLanguage(employee) {
+export function updateLanguage(id) {
     console.log("成功添加");
     return request({
-        url:'/language/',
+        url:'/salary/',
         method:'put',
         header:{
             'Content-Type': 'application/JSON'
         },
-        data:family,
+        data:id,
     })
 }
 

@@ -6,6 +6,8 @@ import job from "./models/job";
 import career from "./models/career";
 import family from "./models/family";
 import language from "./models/language";
+import checkingIn from "./models/checkingIn";
+import salary from "./models/salary";
 import layout from './layout';
 
 Vue.use(Vuex);
@@ -36,6 +38,8 @@ export default new Vuex.Store({
     family,
     language,
     report,
+    checkingIn,
+    salary,
   }
 })
 

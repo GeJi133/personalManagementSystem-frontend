@@ -137,7 +137,7 @@
             //     console.log(careerId);
             //     this.loading = true;
             //     console.log("执行了这个请求");
-            //     this.$store.dispatch("GetDepartment", careerId).then(response => {
+            //     this.$store.dispatch("GetCareer", careerId).then(response => {
             //         console.log("这里之情了");
             //         status = response.data.code;
             //         this.loading = false;
@@ -218,7 +218,7 @@
 
             checkId() {
                 let id=this.addCareer.id;
-                console.log(addCareer);
+                console.log(id);
 
                 this.loading = true;
                 console.log("执行了这个请求");

@@ -23,31 +23,35 @@
                             </thead>
                             <tbody>
                             <tr
-                                    v-for="row in mock.table"
-                                    :key="row.id"
+                                    v-for="employee in mock.employee"
+                                    :key="employee.id"
                             >
-                                <td>{{row.name}}</td>
-                                <td>{{row.email}}</td>
-                                <td>{{row.product}}</td>
-                                <td>{{row.price}}</td>
-                                <td>{{row.date}}</td>
+                                <td>{{employee.id}}</td>
+                                <td>{{employee.email}}</td>
+                                <td>{{employee.sex}}</td>
+                                <td>{{employee.email}}</td>
+                                <td>{{employee.salary}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-success" v-b-modal.modal-2>
+                                    <button type="button" class="btn btn-success"
+                                            v-b-modal="`model-1${employee.id}`">
                                         修改
                                     </button>
+
+                                    <b-modal @ok="handleOk(id)" :id="`model-1${employee.id}`"  title="修改">
+                                        <p class="widget-auth-info">
+                                            请输入修改信息：
+                                        </p>
+                                        <form class="mt" ref="form">
+                                            <div class="form-group">
+                                                <input class="form-control no-border"
+                                                       v-model="editSalary.salary"
+                                                       placeholder="工资结算" />
+                                            </div>
+                                        </form>
+                                    </b-modal>
+
                                 </td>
                             </tr>
-
-                            <b-modal @ok="handleOk(salary)" id="modal-2"  title="修改">
-                                <p class="widget-auth-info">
-                                    请输入修改信息：
-                                </p>
-                                <form class="mt" @submit.prevent="login">
-                                    <div class="form-group">
-                                        <input class="form-control no-border" ref="salary" required type="text" name="salary" placeholder="工资结算" />
-                                    </div>
-                                </form>
-                            </b-modal>
 
                             </tbody>
                         </table>
@@ -71,13 +75,43 @@
     export default {
         name: "salary",
         components: {
-            Widget, BigStat,highcharts: Chart
+            //Widget, BigStat,highcharts: Chart
         },
         data() {
             return {
-                mock
+                mock,
+                salarys:[],
+                editSalary:{},
+                addSalary:{},
+
             };
         },
+
+        mounted() {
+            this.flush();
+        },
+
+        methods:{
+            handleOk(){
+                console.log("执行了这个请求");
+                this.$store
+                    .dispatch("UpdateSalary", id)
+                    .then(response => {
+                        console.log("这里执行了");
+                        console.log(response);
+                        status = response.data.code;
+                        // this.loading=false;
+                        console.log(response.data.code);
+                        if (status == 204) {
+                            this.flush();
+                            alert("请求成功");
+                        } else {
+                            console.log("请求出错");
+                            alert("请求出错");
+                        }
+                    });
+            },
+        }
     }
 </script>
 
