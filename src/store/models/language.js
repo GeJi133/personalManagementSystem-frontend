@@ -28,9 +28,9 @@ const language={
                 })
             })
         },
-        UpdateLanguage({commit},employee){
+        UpdateLanguage({commit},language,id){
             return new Promise((resolve,reject)=>{
-                updateLanguage(employee).then(response=>{
+                updateLanguage(language,id).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)
@@ -39,9 +39,9 @@ const language={
                 })
             })
         },
-        DeleteLanguage({commit},employee){
+        DeleteLanguage({commit},id){
             return new Promise((resolve,reject)=>{
-                deleteLanguage(employee).then(response=>{
+                deleteLanguage(id).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)
@@ -50,9 +50,9 @@ const language={
                 })
             })
         },
-        AddLanguage({commit},employee){
+        AddLanguage({commit},id,language){
             return new Promise((resolve,reject)=>{
-                addLanguage(employee).then(response=>{
+                addLanguage(id,language).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)

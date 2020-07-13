@@ -27,9 +27,9 @@ const salary={
                 })
             })
         },
-        UpdateSalary({commit},employee){
+        UpdateSalary({commit},basicsalary,insurance,awardmoney,finedmoney,id){
             return new Promise((resolve,reject)=>{
-                updateSalary(employee).then(response=>{
+                updateSalary(basicsalary,insurance,awardmoney,finedmoney,id).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)

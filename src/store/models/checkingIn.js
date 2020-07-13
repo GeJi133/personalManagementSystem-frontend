@@ -27,9 +27,9 @@ const checkingIn={
                 })
             })
         },
-        UpdateCheckingIn({commit},employee){
+        UpdateCheckingIn({commit},attendtime,leavetime,id){
             return new Promise((resolve,reject)=>{
-                updateCheckingIn(employee).then(response=>{
+                updateCheckingIn(attendtime,leavetime,id).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)

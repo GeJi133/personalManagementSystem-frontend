@@ -3,7 +3,7 @@ import request from '@/util/request'
 //职业生涯
 export function getCareer(id) {
     return request({
-        url: '/career/' + id+'?type=id',
+        url: '/employee/career/' + id+'?type=id',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),
@@ -14,7 +14,7 @@ export function getCareer(id) {
 
 export function getCareers() {
     return request({
-        url: '/career/',
+        url: '/employee/career/',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),
@@ -23,38 +23,44 @@ export function getCareers() {
     })
 }
 
-export function updateCareer(employee) {
+export function updateCareer(career,id) {
     console.log("成功添加");
     return request({
-        url:'/career/',
+        url:'/employee/career/',
         method:'put',
         header:{
             'Content-Type': 'application/JSON'
         },
-        data:employee,
+        data:{
+            career,
+            id
+        }
     })
 }
 
-export function addCareer(employee) {
+export function addCareer(id,career) {
     console.log("add");
     return request({
-        url: '/career/',
+        url: '/employee/career/',
         method: 'post',
         headers: {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
-        data:employee
+        data:{
+            id,
+            career
+        }
     })
 }
 
-export function deleteCareer(employee) {
+export function deleteCareer(id) {
     return request({
-        url: '/career/',
+        url: '/employee/career/',
         method: 'delete',
         headers: {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
-        data:employee
+        data:id
     })
 }
 
@@ -62,7 +68,7 @@ export function deleteCareer(employee) {
 //家庭情况
 export function getFamily(id) {
     return request({
-        url: '/family/' + id+'?type=id',
+        url: '/employee/family/' + id+'?type=id',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),
@@ -73,7 +79,7 @@ export function getFamily(id) {
 
 export function getFamilys() {
     return request({
-        url: '/family/',
+        url: '/employee/family/',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),
@@ -82,45 +88,51 @@ export function getFamilys() {
     })
 }
 
-export function updateFamily(employee) {
+export function updateFamily(family, id) {
     console.log("成功添加");
     return request({
-        url:'/family/',
+        url:'/employee/family/',
         method:'put',
         header:{
             'Content-Type': 'application/JSON'
         },
-        data:employee,
+        data:{
+            family,
+            id,
+        }
     })
 }
 
-export function addFamily(employee) {
+export function addFamily(id,family) {
     console.log("add");
     return request({
-        url: '/family/',
+        url: '/employee/family/',
         method: 'post',
         headers: {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
-        data:employee
+        data:{
+            id,
+            family
+        }
     })
 }
 
-export function deleteFamily(employee) {
+export function deleteFamily(id) {
     return request({
-        url: '/family/',
+        url: '/employee/family/'+id,
         method: 'delete',
         headers: {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
-        data:employee
+        data:id
     })
 }
 
 //语言能力
 export function getLanguage(id) {
     return request({
-        url: '/language/' + id+'?type=id',
+        url: '/employee/language/' + id+'?type=id',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),
@@ -131,7 +143,7 @@ export function getLanguage(id) {
 
 export function getLanguages() {
     return request({
-        url: '/language/',
+        url: '/employee/language/',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),
@@ -140,37 +152,43 @@ export function getLanguages() {
     })
 }
 
-export function updateLanguage(id) {
+export function updateLanguage(language,id) {
     console.log("成功添加");
     return request({
-        url:'/salary/',
+        url:'/employee/language/',
         method:'put',
         header:{
             'Content-Type': 'application/JSON'
         },
-        data:id,
+        data:{
+            language,
+            id,
+        }
     })
 }
 
-export function addLanguage(employee) {
+export function addLanguage(id,language) {
     console.log("add");
     return request({
-        url: '/language/',
+        url: '/employee/language/',
         method: 'post',
         headers: {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
-        data:employee
+        data:{
+            id,
+            language
+        }
     })
 }
 
-export function deleteLanguage(employee) {
+export function deleteLanguage(id) {
     return request({
-        url: '/language/',
+        url: '/employee/language/'+ id,
         method: 'delete',
         headers: {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
-        data:employee
+        data:id
     })
 }

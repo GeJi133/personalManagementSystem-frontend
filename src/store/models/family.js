@@ -28,9 +28,9 @@ const family={
                 })
             })
         },
-        UpdateFamily({commit},employee){
+        UpdateFamily({commit},family,id){
             return new Promise((resolve,reject)=>{
-                updateFamily(employee).then(response=>{
+                updateFamily(family, id).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)
@@ -39,9 +39,9 @@ const family={
                 })
             })
         },
-        DeleteFamily({commit},employee){
+        DeleteFamily({commit},id){
             return new Promise((resolve,reject)=>{
-                deleteFamily(employee).then(response=>{
+                deleteFamily(id).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)
@@ -50,9 +50,9 @@ const family={
                 })
             })
         },
-        AddFamily({commit},employee){
+        AddFamily({commit},id,family){
             return new Promise((resolve,reject)=>{
-                addFamily(employee).then(response=>{
+                addFamily(id,family).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)

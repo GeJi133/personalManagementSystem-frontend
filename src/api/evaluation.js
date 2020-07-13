@@ -23,7 +23,7 @@ export function getChinkingIns() {
     })
 }
 
-export function updateChinkingIn(id) {
+export function updateChinkingIn(attendtime,leavetime,id) {
     console.log("成功添加");
     return request({
         url:'/clock/',
@@ -31,7 +31,11 @@ export function updateChinkingIn(id) {
         header:{
             'Content-Type': 'application/JSON'
         },
-        data:id,
+        data:{
+            attendtime,
+            leavetime,
+            id
+        }
     })
 }
 
@@ -50,7 +54,7 @@ export function getSalary(id) {
 
 export function getSalarys() {
     return request({
-        url: '/family/',
+        url: '/salary/',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),
@@ -59,14 +63,20 @@ export function getSalarys() {
     })
 }
 
-export function updateSalary(id) {
+export function updateSalary(basicsalary,insurance,awardmoney,finedmoney,id) {
     console.log("成功添加");
     return request({
-        url:'/family/',
+        url:'/salary/',
         method:'put',
         header:{
             'Content-Type': 'application/JSON'
         },
-        data:id,
+        data:{
+            basicsalary,
+            insurance,
+            awardmoney,
+            finedmoney,
+            id
+        }
     })
 }

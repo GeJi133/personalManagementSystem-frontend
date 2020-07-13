@@ -5,7 +5,7 @@
         <b-row>
             <b-col xs="12">
                 <Widget
-                        title="<h5>Support <span class='fw-semi-bold'>Requests</span></h5>"
+                        title="<h5>Support <span class='fw-semi-bold'>语言能力列表</span></h5>"
                         bodyClass="widget-table-overflow"
                         customHeader
                 >
@@ -50,21 +50,21 @@
                             </thead>
                             <tbody>
                             <tr
-                                    v-for="employee in mock.employee"
+                                    v-for="employee in employees"
                                     :key="employee.id"
                             >
-                                <td>{{employee.id}}</td>
-                                <td>{{employee.name}}</td>
-                                <td>{{employee.sex}}</td>
-                                <td>{{employee.email}}</td>
-                                <td>{{employee.language}}</td>
+                                <td><a href="#" @click="viewLanguage(employee.id)">{{employee.id}}</a></td>
+                                <td><a href="#" @click="viewLanguage(employee.id)">{{employee.name}}</a></td>
+                                <td><a href="#" @click="viewLanguage(employee.id)">{{employee.sex}}</a></td>
+                                <td><a href="#" @click="viewLanguage(employee.id)">{{employee.email}}</a></td>
+                                <td><a href="#" @click="viewLanguage(employee.id)">{{employee.language}}</a></td>
                                 <td>
                                     <button type="button" class="btn btn-success"
                                             v-b-modal="`model-2${employee.id}`">
                                         修改
                                     </button>
 
-                                    <b-modal @ok="handleOk(language)" :id="`model-2${employee.id}`"  title="修改">
+                                    <b-modal @ok="handleOk(employee)" :id="`model-2${employee.id}`"  title="修改">
                                         <p class="widget-auth-info">
                                             请输入修改信息：
                                         </p>
@@ -73,6 +73,12 @@
                                                 <input class="form-control no-border"
                                                        v-model="editLanguage.language"
                                                        placeholder="外语能力" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control no-border"
+                                                       @change="checkId1()"
+                                                       v-model="editLanguage.id"
+                                                       placeholder="工号" />
                                             </div>
                                         </form>
                                     </b-modal>
@@ -91,7 +97,6 @@
                                     </b-modal>
                                 </td>
                             </tr>
-
 
                             </tbody>
                         </table>
@@ -122,6 +127,7 @@
                 languages:[],
                 addLanguage:{},
                 editLanguage:{},
+                employees:[]
 
             };
         },
@@ -131,6 +137,32 @@
         },
 
         methods:{
+
+            viewLanguage(id) {
+                console.log();
+                this.loading = true;
+                console.log("执行了这个请求");
+                this.$store.dispatch("GetLanguage",id).then(response => {
+                    console.log("这里之情了");
+                    status = response.data.code;
+                    this.loading = false;
+                    console.log(response.data.code);
+
+                    if (status == 200) {
+                        let department = response.data.data[0];
+                        console.log("career", career);
+                        // alert("dhjakdhk");
+                        this.$router.push({
+                            path: "/manage/language",
+                            query: { language: language }
+                        });
+                    } else {
+                        console.log("请求出错");
+                        alert("请求出错");
+                    }
+                });
+            },
+
             handleOk(){
                 console.log("执行了这个请求");
                 this.$store
@@ -214,8 +246,33 @@
                     }
                 });
             },
+            checkId1() {
+                let id=this.editLanguage.id;
+                console.log(id);
 
-            deleteLanguage() {
+                this.loading = true;
+                console.log("执行了这个请求");
+                this.$store.dispatch("GetLanguage", id).then(response => {
+                    console.log("这里执行了");
+                    status = response.data.code;
+
+                    this.loading = false;
+                    console.log(response.data.code);
+                    console.log(response.data.data);
+
+                    if (status == 200) {
+                        if (response.data.data.length == 0) {
+                            this.errorMessage = "该员工不存在";
+                            alert("工号不可用");
+                        }
+                        else {
+                            this.errorMessage = "该员工存在";
+                        }
+                    }
+                });
+            },
+
+            deleteLanguage(id) {
                 console.log(id);
                 this.loading = true;
                 console.log("执行了这个请求");
