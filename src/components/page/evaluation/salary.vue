@@ -9,6 +9,7 @@
                         bodyClass="widget-table-overflow"
                         customHeader
                 >
+
                     <div class="table-responsive">
                         <table class="table table-striped table-lg mb-0 requests-table">
                             <thead>
@@ -34,9 +35,6 @@
                                     <button type="button" class="btn btn-success" v-b-modal.modal-2>
                                         修改
                                     </button>
-                                    <button type="button" class="btn btn-warning">
-                                        删除
-                                    </button>
                                 </td>
                             </tr>
 
@@ -45,30 +43,6 @@
                                     请输入修改信息：
                                 </p>
                                 <form class="mt" @submit.prevent="login">
-                                    <div class="form-group">
-                                        <input class="form-control no-border" ref="salary" required type="text" name="salary" placeholder="工资结算" />
-                                    </div>
-                                </form>
-                            </b-modal>
-
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <div style="text-align:center">
-                                    <button type="button" class="btn btn-info" v-b-modal.modal-3>
-                                        新增
-                                    </button>
-                                </div>
-                            </tr>
-
-                            <b-modal @ok="handleOk(career)" id="modal-3"  title="新增">
-                                <p class="widget-auth-info">
-                                    请输入新增信息：
-                                </p>
-                                <form class="mt" @submit.prevent="login">
-                                    <div class="form-group">
-                                        <input class="form-control no-border" ref="id" required type="text" name="id" placeholder="工号" />
-                                    </div>
                                     <div class="form-group">
                                         <input class="form-control no-border" ref="salary" required type="text" name="salary" placeholder="工资结算" />
                                     </div>

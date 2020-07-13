@@ -27,7 +27,7 @@ export function updateDepartment(department) {
         headers: {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
-        data:department,
+        data:department
     })
 }
 

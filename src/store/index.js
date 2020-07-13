@@ -3,6 +3,9 @@ import Vuex from 'vuex';
 import report from "./models/report";
 import department from "./models/department";
 import job from "./models/job";
+import career from "./models/career";
+import family from "./models/family";
+import language from "./models/language";
 import layout from './layout';
 
 Vue.use(Vuex);
@@ -29,6 +32,9 @@ export default new Vuex.Store({
     layout,
     job,
     department,
+    career,
+    family,
+    language,
     report,
   }
 })

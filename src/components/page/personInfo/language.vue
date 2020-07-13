@@ -9,6 +9,29 @@
                         bodyClass="widget-table-overflow"
                         customHeader
                 >
+                    <b-col offset="10" lg="8" xs="12">
+                        <b-col md="4" v-b-modal="`modal-3`" lg="3" xs="12" class="icon-list-item" >
+                            <span class="glyphicon glyphicon-plus-sign" />
+                            <h8 class="fw-semi-bold">新增外语能力信息</h8>
+                        </b-col>
+                        <b-modal @ok="handleOk(language)" :id="`modal-3`"  title="新增">
+                            <p class="widget-auth-info">
+                                请输入新增信息：
+                            </p>
+                            <form class="mt" >
+                                <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
+                                    {{errorMessage}}
+                                </b-alert>
+                                <div class="form-group">
+                                    <input class="form-control no-border" ref="id" required type="text" name="id" placeholder="工号" />
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control no-border" ref="language" required type="text" name="language" placeholder="外语能力" />
+                                </div>
+                            </form>
+                        </b-modal>
+                    </b-col>
+
                     <div class="table-responsive">
                         <table class="table table-striped table-lg mb-0 requests-table">
                             <thead>
@@ -22,14 +45,14 @@
                             </thead>
                             <tbody>
                             <tr
-                                    v-for="row in mock.table"
-                                    :key="row.id"
+                                    v-for="employee in mock.table"
+                                    :key="employee.id"
                             >
-                                <td>{{row.name}}</td>
-                                <td>{{row.email}}</td>
-                                <td>{{row.product}}</td>
-                                <td>{{row.price}}</td>
-                                <td>{{row.date}}</td>
+                                <td>{{employee.id}}</td>
+                                <td>{{employee.name}}</td>
+                                <td>{{employee.sex}}</td>
+                                <td>{{employee.email}}</td>
+                                <td>{{employee.language}}</td>
                                 <td>
                                     <button type="button" class="btn btn-success" v-b-modal.modal-2>
                                         修改
@@ -50,32 +73,6 @@
                                     </div>
                                 </form>
                             </b-modal>
-
-
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <div style="text-align:center">
-                                    <button type="button" class="btn btn-info" v-b-modal.modal-3>
-                                        新增
-                                    </button>
-                                </div>
-                            </tr>
-
-                            <b-modal @ok="handleOk(language)" id="modal-3"  title="新增">
-                                <p class="widget-auth-info">
-                                    请输入新增信息：
-                                </p>
-                                <form class="mt" @submit.prevent="login">
-                                    <div class="form-group">
-                                        <input class="form-control no-border" ref="id" required type="text" name="id" placeholder="工号" />
-                                    </div>
-                                    <div class="form-group">
-                                        <input class="form-control no-border" ref="language" required type="text" name="language" placeholder="外语能力" />
-                                    </div>
-                                </form>
-                            </b-modal>
-
                             </tbody>
                         </table>
                     </div>
