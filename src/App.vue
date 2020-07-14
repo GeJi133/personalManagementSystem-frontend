@@ -5,15 +5,12 @@
 <script>
 export default {
   name: 'App',
-  // created() {
-  //   const currentPath = this.$router.history.current.path;
-  //   if (window.localStorage.getItem('authenticated') === 'true') {
-  //     this.$router.push('/login');
-  //   }
-  //   if (currentPath === '/' || currentPath === '/app') {
-  //     this.$router.push('/login');
-  //   }
-  // },
+  created() {
+    // const currentPath = this.$router.history.current.path;
+    if (localStorage.getItem('token') === '') {
+      this.$router.push('/login');
+    }
+  },
 };
 </script>
 

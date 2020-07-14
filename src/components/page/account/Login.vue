@@ -7,15 +7,21 @@
         <i class="fa fa-circle text-danger"></i>
       </h5>
       <Widget class="widget-auth mx-auto" title="<h3 class='mt-0'>Login to your Web App</h3>" customHeader>
+        <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
+          {{errorMessage}}
+
+        </b-alert>
+
         <p class="widget-auth-info">
             Use your id to sign in.
         </p>
+
         <form class="mt" @submit.prevent="login">
           <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
             {{errorMessage}}
           </b-alert>
           <div class="form-group">
-            <input class="form-control no-border" v-model="loginForm.id" required type="text" name="email" placeholder="员工号" />
+            <input class="form-control no-border" v-model="loginForm.username" required type="text" name="email" placeholder="员工号" />
           </div>
           <div class="form-group">
             <input class="form-control no-border" v-model="loginForm.password"  required type="text" name="password" placeholder="密码" />
@@ -48,6 +54,7 @@
 
 <script>
 import Widget from '@/components/Widget/Widget';
+import { mapMutations } from "vuex";
 
 export default {
   name: 'LoginPage',
@@ -56,23 +63,56 @@ export default {
     return {
       errorMessage: null,
       loginForm:{
-        id:"",
+        username:"",
         password:"",
       }
     };
   },
   methods: {
+    ...mapMutations(["ChangeLogin"]),
 
     login() {
+      this.$store.dispatch("Login",this.loginForm).then(response => {
+        console.log("登录");
+        status = response.data.code;
 
-      if (1) {
-        if(this.loginForm.id=='1') {
-          this.$router.push('/manage/manageMain');
-        }else{
-          this.$router.push('/staff/main');
+        this.loading = false;
+        console.log(response.data.code);
+        console.log("登录响应",response.data.data);
+        let _this=this;
+
+        if (status == 200) {
+          let token=response.data.data.token;
+          let role=response.data.data.role;
+          _this.ChangeLogin(token);
+          console.log("执行后的token",localStorage.getItem('token'));
+
+          this.routeTo(role);
+
+          console.log("lalallala");
+          this.transferList = response.data.data;
+        } else {
+          this.errorMessage=response.data.data.message;
+          console.log("请求出错");
+          alert("请求出错");
         }
-      }
-    },
+      });
+      // if (1) {
+
+      //   }
+      },
+    routeTo(role){
+        if(role=='ROLE_ADMIN') {
+          this.$router.push('/manage/manageMain');
+        }else if(role=='ROLE_EMPLOYEE'){
+          this.$router.push('/staff/main');
+        }else if(role=='ROLE_TRAINEE'){
+          this.$router.push('/staff/main');
+        }else{
+          alert("身份验证失败");
+        }
+    }
+
   },
   // created() {
   //   if (window.localStorage.getItem('authenticated') === 'true') {

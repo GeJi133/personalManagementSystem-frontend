@@ -5,10 +5,10 @@ export function getCheckingIn(id) {
     return request({
         url: '/clock/' + id+'?type=id',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -16,10 +16,10 @@ export function getCheckingIns() {
     return request({
         url: '/clock/',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -45,10 +45,10 @@ export function getSalary(id) {
     return request({
         url: '/salary/' + id+'?type=id',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -56,10 +56,10 @@ export function getSalarys() {
     return request({
         url: '/salary/',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 

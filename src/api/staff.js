@@ -6,9 +6,9 @@ export function getStaff(staffId) {
     return request({
         url: '/staff/' + staffId,
         method: 'get',
-        // headers: {
-            // 'token': localStorage.getItem('token'),
-            // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+            'token': localStorage.getItem('token'),
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }

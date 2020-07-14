@@ -13,10 +13,10 @@ export function getDepartments() {
     return request({
         url: '/departments/',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -24,10 +24,10 @@ export function getDepartmentsByJnoKey(key) {
     return request({
         url: 'departments/'+key+'?type=department',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 export function getDepartmentsByDeKey(key) {
@@ -35,10 +35,10 @@ export function getDepartmentsByDeKey(key) {
     return request({
         url: 'departments/'+key+'?type=business',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -48,7 +48,7 @@ export function updateDepartment(department) {
         url: '/departments/',
         method: 'put',
         headers: {
-            // 'token': localStorage.getItem('token'),
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
         data:department
     })
@@ -60,7 +60,7 @@ export function addDepartment(department) {
         url: '/departments/',
         method: 'post',
         headers: {
-            // 'token': localStorage.getItem('token'),
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
         data:department
     })
@@ -70,7 +70,7 @@ export function deleteDepartment(dno) {
         url: '/departments/',
         method: 'delete',
         headers: {
-            // 'token': localStorage.getItem('token'),
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
         data:dno
     })

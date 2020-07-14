@@ -6,10 +6,10 @@ export function getJob(jno) {
     return request({
         url: '/jobs/' + jno+'?type=jno',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 export function getJobByDeKey(key) {
@@ -17,10 +17,10 @@ export function getJobByDeKey(key) {
     return request({
         url: 'jobs/'+key+'?type=job ',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -28,20 +28,20 @@ export function getJobsByDno(dno) {
     return request({
         url: 'departments/jobs/' + dno,
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 export function getPersonListByJob(jno) {
     return request({
         url: 'jobs/employees/' + jno,
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -49,10 +49,10 @@ export function getJobs() {
     return request({
         url: '/jobs/',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -61,7 +61,7 @@ export function updateJob(job) {
         url: '/jobs/',
         method: 'put',
         headers: {
-            // 'token': localStorage.getItem('token'),
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
         data:job
     })
@@ -73,7 +73,7 @@ export function addJob(job) {
         url: '/jobs/',
         method: 'post',
         headers: {
-            // 'token': localStorage.getItem('token'),
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
         data:job
     })
