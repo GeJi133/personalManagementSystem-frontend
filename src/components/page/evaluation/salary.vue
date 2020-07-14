@@ -9,7 +9,6 @@
                         bodyClass="widget-table-overflow"
                         customHeader
                 >
-
                     <div class="table-responsive">
                         <table class="table table-striped table-lg mb-0 requests-table">
                             <thead>
@@ -52,30 +51,30 @@
                                         <form class="mt" ref="form">
                                             <div class="form-group">
                                                 <input class="form-control no-border"
-                                                       v-model="editSalary.basicsalary"
+                                                       v-model="employee.basicsalary"
                                                        placeholder="基本工资" />
                                             </div>
                                             <div class="form-group">
                                                 <input class="form-control no-border"
-                                                       v-model="editSalary.insurance"
+                                                       v-model="employee.insurance"
                                                        placeholder="五险一金" />
                                             </div>
                                             <div class="form-group">
                                                 <input class="form-control no-border"
-                                                       v-model="editSalary.awardmoney"
+                                                       v-model="employee.awardmoney"
                                                        placeholder="奖金" />
                                             </div>
                                             <div class="form-group">
                                                 <input class="form-control no-border"
-                                                       v-model="editSalary.finedmoney"
+                                                       v-model="employee.finedmoney"
                                                        placeholder="罚金" />
                                             </div>
-                                            <div class="form-group">
-                                                <input class="form-control no-border"
-                                                       @change="checkId()"
-                                                       v-model="editSalary.id"
-                                                       placeholder="工号" />
-                                            </div>
+<!--                                            <div class="form-group">-->
+<!--                                                <input class="form-control no-border"-->
+<!--                                                       @change="checkId()"-->
+<!--                                                       v-model="employee.id"-->
+<!--                                                       placeholder="工号" />-->
+<!--                                            </div>-->
                                         </form>
                                     </b-modal>
 
@@ -132,7 +131,7 @@
                     console.log(response.data.code);
 
                     if (status == 200) {
-                        this.careers = response.data.data;
+                        this.employees = response.data.data;
                     } else {
                         console.log("请求出错");
                         alert("请求出错");

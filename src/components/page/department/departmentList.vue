@@ -10,6 +10,25 @@
           bodyClass="widget-table-overflow"
           customHeader
         >
+
+          <div class="float-left">
+            <b-nav>
+              <b-form class="d-sm-down-none ml-5" inline>
+                <b-form-group>
+                  <b-input-group class="input-group-no-border">
+                    <template v-slot:prepend>
+                      <b-input-group-text @click="search"  ><i class="la la-search"/></b-input-group-text>
+                    </template>
+                    <input
+                            class="form-control no-border"
+                            v-model="keyWord"
+                            placeholder="部门业务"
+                    />
+                  </b-input-group>
+                </b-form-group>
+              </b-form>
+            </b-nav>
+          </div>
           <b-col offset="10" lg="8" xs="12">
             <b-col md="4" v-b-modal="`model-20`" lg="3" xs="12" class="icon-list-item">
               <span class="glyphicon glyphicon-plus-sign" />
@@ -80,6 +99,10 @@
                 </tr>
               </thead>
               <tbody>
+              <td>
+                <h3 v-if="departments.length==0">暂时无数据</h3>
+              </td>
+
                 <tr v-for="department in departments" :key="department.dno">
                   <td>
                     <a href="#" @click="viewDepartment(department.dno)">{{department.dno}}</a>
@@ -196,7 +219,8 @@ export default {
       ],
       editDepartment: {},
       addDepartment: {},
-      errorMessage: ""
+      errorMessage: "",
+      keyWord:"lala"
     };
   },
   mounted() {
@@ -223,6 +247,39 @@ export default {
             path: "/manage/viewDepartment",
             query: { department: department }
           });
+        } else {
+          console.log("请求出错");
+          alert("请求出错");
+        }
+      });
+    },
+    search(){
+      this.loading = true;
+      console.log("执行了搜索",this.keyWord);
+      // this.$store.dispatch("GetDepartmentsByJnoKey",this.keyWord).then(response => {
+      //   console.log("这里之情了");
+      //   status = response.data.code;
+      //   this.loading = false;
+      //   console.log(response.data.code);
+      //
+      //   if (status == 200) {
+      //     this.departments = response.data.data;
+      //   } else {
+      //     console.log("请求出错");
+      //     alert("请求出错");
+      //   }
+      // });
+
+      this.loading = true;
+      console.log("执行了这个请求");
+      this.$store.dispatch("GetDepartmentsByDeKey",this.keyWord).then(response => {
+        console.log("这里之情了");
+        status = response.data.code;
+        this.loading = false;
+        console.log(response.data.code);
+
+        if (status == 200) {
+          this.departments =response.data.data;
         } else {
           console.log("请求出错");
           alert("请求出错");

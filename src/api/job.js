@@ -12,7 +12,17 @@ export function getJob(jno) {
         // },
     })
 }
-
+export function getJobByDeKey(key) {
+    console.log("keylal",key)
+    return request({
+        url: 'jobs/'+key+'?type=job ',
+        method: 'get',
+        // headers: {
+        // 'token': localStorage.getItem('token'),
+        // 'Content-Type': 'application/x-www-form-urlencoded'
+        // },
+    })
+}
 
 export function getJobsByDno(dno) {
     return request({

@@ -1,7 +1,7 @@
 import request from '@/util/request'
 
 //考勤
-export function getChinkingIn(id) {
+export function getCheckingIn(id) {
     return request({
         url: '/clock/' + id+'?type=id',
         method: 'get',
@@ -12,7 +12,7 @@ export function getChinkingIn(id) {
     })
 }
 
-export function getChinkingIns() {
+export function getCheckingIns() {
     return request({
         url: '/clock/',
         method: 'get',
@@ -23,7 +23,7 @@ export function getChinkingIns() {
     })
 }
 
-export function updateChinkingIn(attendtime,leavetime,id) {
+export function updateCheckingIn(attendtime,leavetime,id) {
     console.log("成功添加");
     return request({
         url:'/clock/',

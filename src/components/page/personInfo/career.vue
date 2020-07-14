@@ -59,37 +59,37 @@
                                 <td><a href="#" @click="viewCareer(employee.id)">{{employee.email}}</a></td>
                                 <td><a href="#" @click="viewCareer(employee.id)">{{employee.career}}</a></td>
                                 <td>
-                                    <button type="button" class="btn btn-success"
+                                    <b-button  variant="default" class="mr-xs" size="sm"
                                             v-b-modal="`model-2${employee.id}`">
                                         修改
-                                    </button>
+                                    </b-button>
 
                                     <b-modal @ok="handleOk1(employee)" :id="`model-2${employee.id}`"  title="修改">
                                         <p class="widget-auth-info">
-                                            请输入修改信息：
+                                            工号{{employee.id}}：
                                         </p>
                                         <form class="mt" ref="form">
+<!--                                            <div class="form-group">-->
+<!--                                                <input class="form-control no-border"-->
+<!--                                                       @change="checkId1()"-->
+<!--                                                       v-model="editCareer.id"-->
+<!--                                                       placeholder="工号" />-->
+<!--                                            </div>-->
                                             <div class="form-group">
                                                 <input class="form-control no-border"
-                                                       @change="checkId1()"
-                                                       v-model="editCareer.id"
-                                                       placeholder="工号" />
-                                            </div>
-                                            <div class="form-group">
-                                                <input class="form-control no-border"
-                                                       v-model="editCareer.career"
+                                                       v-model="employee.career"
                                                        placeholder="职业生涯" />
                                             </div>
                                         </form>
                                     </b-modal>
 
-                                    <button type="button" class="btn btn-warning"
+                                    <b-button  variant="default" class="mr-xs" size="sm"
                                             v-b-modal="`model-1${employee.id}`">
                                         删除
-                                    </button>
+                                    </b-button>
 
                                     <b-modal
-                                            @ok="deleteCareer(employee.id)"
+                                            @ok="handelOk2(employee.id)"
                                             :id="`model-1${employee.id}`"
                                             title="提示"
                                     >
@@ -212,7 +212,7 @@
                     console.log(response.data.code);
 
                     if (status == 200) {
-                        this.careers = response.data.data;
+                        this.employees = response.data.data;
                     } else {
                         console.log("请求出错");
                         alert("请求出错");
@@ -272,18 +272,18 @@
                 });
             },
 
-            deleteCareer(employeeId) {
+            handelOk2(employeeId) {
                 console.log(employeeId);
                 this.loading = true;
-                console.log("执行了这个请求");
+                console.log("deleteq");
                 this.$store.dispatch("DeleteCareer", employeeId).then(response => {
                     console.log("这里之情了");
-                    status = response.data.code;
+                    status = response.data.status;
                     this.loading = false;
                     console.log(response.data.code);
-                    console.log(response.data.data);
+                    // console.log(response.data.data);
 
-                    if (status == 204) {
+                    if (status == 200) {
                         alert("删除成功");
                         this.flush();
                     } else {

@@ -28,9 +28,9 @@ const language={
                 })
             })
         },
-        UpdateLanguage({commit},language,id){
+        UpdateLanguage({commit},emoloyee){
             return new Promise((resolve,reject)=>{
-                updateLanguage(language,id).then(response=>{
+                updateLanguage(emoloyee).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)

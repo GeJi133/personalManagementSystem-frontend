@@ -1,6 +1,6 @@
 import {getLeaving} from '@/api/report'
 import {getTransfer} from '@/api/report'
-import {getTransferByTime} from "../../api/report";
+import {getDepartmentTransferByTime} from "../../api/report";
 import {getLeavingByTime} from "../../api/report";
 
 const report ={
@@ -16,9 +16,9 @@ const report ={
                 })
             })
         },
-        GetTransfersByTime({commit},date){
+        GetDepartmentTransfersByTime({commit},date){
             return new Promise((resolve,reject)=>{
-                getTransferByTime(date).then(response=>{
+                getDepartmentTransferByTime(date).then(response=>{
                     commit('CHANGE');
                     console.log("responde",response)
                     resolve(response)
@@ -27,6 +27,7 @@ const report ={
                 })
             })
         },
+
         GetLeavingsByTime({commit},date){
             return new Promise((resolve,reject)=>{
                 getLeavingByTime(date).then(response=>{

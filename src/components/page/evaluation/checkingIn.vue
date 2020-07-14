@@ -9,7 +9,6 @@
                         bodyClass="widget-table-overflow"
                         customHeader
                 >
-
                     <div class="table-responsive">
                         <table class="table table-striped table-lg mb-0 requests-table">
                             <thead>
@@ -44,20 +43,20 @@
                                         <form class="mt" ref="form">
                                             <div class="form-group">
                                                 <input class="form-control no-border"
-                                                       v-model="editCheckingIn.attendtime"
+                                                       v-model="employee.attendtime"
                                                        placeholder="上班打卡时间" />
                                             </div>
                                             <div class="form-group">
                                                 <input class="form-control no-border"
-                                                       v-model="editCheckingIn.leavetime"
+                                                       v-model="employee.leavetime"
                                                        placeholder="下班打卡时间" />
                                             </div>
-                                            <div class="form-group">
-                                                <input class="form-control no-border"
-                                                       @change="checkId()"
-                                                       v-model="editCheckingIn.id"
-                                                       placeholder="工号" />
-                                            </div>
+<!--                                            <div class="form-group">-->
+<!--                                                <input class="form-control no-border"-->
+<!--                                                       @change="checkId()"-->
+<!--                                                       v-model="editCheckingIn.id"-->
+<!--                                                       placeholder="工号" />-->
+<!--                                            </div>-->
                                         </form>
                                     </b-modal>
                                 </td>
@@ -93,7 +92,6 @@
                 editCheckingIn:{},
                 employees:[],
 
-
             };
         },
 
@@ -106,20 +104,19 @@
                 this.loading = true;
                 console.log("执行了这个请求");
                 this.$store.dispatch("GetCheckingIns").then(response => {
-                    console.log("这里之情了");
+                    console.log("这里执行了");
                     status = response.data.code;
                     this.loading = false;
                     console.log(response.data.code);
 
                     if (status == 200) {
-                        this.careers = response.data.data;
+                        this.employees = response.data.data;
                     } else {
                         console.log("请求出错");
                         alert("请求出错");
                     }
                 });
             },
-
             checkId() {
                 let id=this.editCheckingIn.id;
                 console.log(id);

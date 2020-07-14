@@ -4,6 +4,9 @@ import {updateJob} from '@/api/job'
 import {deleteJob} from '@/api/job'
 import {addJob} from '@/api/job'
 import  {getJobsByDno} from "@/api/job";
+import {getDepartmentsByJnoKey}  from "@/api/department";
+import {getDepartmentsByDeKey}  from "@/api/department";
+import {getJobByDeKey} from "../../api/job";
 
 const department ={
     actions:{
@@ -21,6 +24,39 @@ const department ={
         GetJobs({commit}){
             return new Promise((resolve,reject)=>{
                 getJobs().then(response=>{
+                    commit('CHANGE')
+                    console.log("responde",response)
+                    resolve(response)
+                }).catch(error=>{
+                    reject(error)
+                })
+            })
+        },
+        GetJobByDeKey({commit},key){
+            return new Promise((resolve,reject)=>{
+                getJobByDeKey(key).then(response=>{
+                    commit('CHANGE')
+                    console.log("responde",response)
+                    resolve(response)
+                }).catch(error=>{
+                    reject(error)
+                })
+            })
+        },
+        GetDepartmentsByDeKey({commit},key){
+            return new Promise((resolve,reject)=>{
+                getDepartmentsByDeKey(key).then(response=>{
+                    commit('CHANGE')
+                    console.log("responde",response)
+                    resolve(response)
+                }).catch(error=>{
+                    reject(error)
+                })
+            })
+        },
+        GetDepartmentsByJnoKey({commit},key){
+            return new Promise((resolve,reject)=>{
+                getDepartmentsByJnoKey(key).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)

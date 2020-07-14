@@ -19,6 +19,29 @@ export function getDepartments() {
         // },
     })
 }
+
+export function getDepartmentsByJnoKey(key) {
+    return request({
+        url: 'departments/'+key+'?type=department',
+        method: 'get',
+        // headers: {
+        // 'token': localStorage.getItem('token'),
+        // 'Content-Type': 'application/x-www-form-urlencoded'
+        // },
+    })
+}
+export function getDepartmentsByDeKey(key) {
+    console.log("keylal",key)
+    return request({
+        url: 'departments/'+key+'?type=business',
+        method: 'get',
+        // headers: {
+        // 'token': localStorage.getItem('token'),
+        // 'Content-Type': 'application/x-www-form-urlencoded'
+        // },
+    })
+}
+
 export function updateDepartment(department) {
     console.log("department",department);
     return request({

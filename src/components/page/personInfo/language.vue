@@ -9,15 +9,18 @@
                         bodyClass="widget-table-overflow"
                         customHeader
                 >
+
                     <b-col offset="10" lg="8" xs="12">
                         <b-col md="4" v-b-modal="`modal-3`" lg="3" xs="12" class="icon-list-item" >
                             <span class="glyphicon glyphicon-plus-sign" />
                             <h8 class="fw-semi-bold">新增外语能力信息</h8>
                         </b-col>
+
                         <b-modal @ok="handleOk" :id="`modal-3`"  title="新增">
                             <p class="widget-auth-info">
                                 请输入新增信息：
                             </p>
+
                             <form class="mt" ref="form">
                                 <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
                                     {{errorMessage}}
@@ -29,9 +32,16 @@
                                            placeholder="工号" />
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control no-border"
-                                           v-model="addLanguage.language"
-                                           placeholder="外语能力" />
+                                    <div>
+                                        <p class="widget-auth-info">设置外语等级：</p>
+                                        <b-form-select
+                                                class="form-control no-border"
+                                                v-model="addLanguage.language"
+
+                                                :options="languageOptions"
+                                        ></b-form-select>
+
+                                    </div>
                                 </div>
                             </form>
                         </b-modal>
@@ -59,37 +69,38 @@
                                 <td><a href="#" @click="viewLanguage(employee.id)">{{employee.email}}</a></td>
                                 <td><a href="#" @click="viewLanguage(employee.id)">{{employee.language}}</a></td>
                                 <td>
-                                    <button type="button" class="btn btn-success"
+                                    <b-button  variant="default" class="mr-xs" size="sm"
                                             v-b-modal="`model-2${employee.id}`">
                                         修改
-                                    </button>
+                                    </b-button>
 
-                                    <b-modal @ok="handleOk(employee)" :id="`model-2${employee.id}`"  title="修改">
+                                    <b-modal @ok="handleOk1(employee)" :id="`model-2${employee.id}`"  title="修改">
                                         <p class="widget-auth-info">
-                                            请输入修改信息：
+                                           工号： {{employee.id}}：
                                         </p>
-                                        <form class="mt" ref="form">
-                                            <div class="form-group">
-                                                <input class="form-control no-border"
-                                                       v-model="editLanguage.language"
-                                                       placeholder="外语能力" />
+
+                                        <div class="form-group">
+                                            <div>
+                                                <p class="widget-auth-info">设置外语等级：</p>
+                                                <b-form-select
+                                                        class="form-control no-border"
+                                                        v-model="employee.language"
+                                                        :options="languageOptions"
+                                                ></b-form-select>
+
                                             </div>
-                                            <div class="form-group">
-                                                <input class="form-control no-border"
-                                                       @change="checkId1()"
-                                                       v-model="editLanguage.id"
-                                                       placeholder="工号" />
-                                            </div>
-                                        </form>
+                                        </div>
+
+
                                     </b-modal>
 
-                                    <button type="button" class="btn btn-warning"
+                                    <b-button  variant="default" class="mr-xs" size="sm"
                                             v-b-modal="`model-1${employee.id}`">
                                         删除
-                                    </button>
+                                    </b-button>
 
                                     <b-modal
-                                            @ok="deleteLanguage(employee.id)"
+                                            @ok="handelOk2(employee.id)"
                                             :id="`model-1${employee.id}`"
                                             title="提示"
                                     >
@@ -127,8 +138,12 @@
                 languages:[],
                 addLanguage:{},
                 editLanguage:{},
-                employees:[]
-
+                employees:[],
+                languageOptions:[
+                    {value: "CET4", text: "CET4"},
+                    {value: "CET6", text: "CET6"},
+                    {value: "TEM4", text: "TEM8"}
+                ]
             };
         },
 
@@ -183,19 +198,19 @@
                     });
             },
 
-            handleOk1(){
+            handleOk1(employee){
                 console.log("执行了这个请求");
                 this.$store
                     .dispatch("UpdateLanguage", employee)
                     .then(response => {
                         console.log("这里执行了");
                         console.log(response);
-                        status = response.data.code;
+                        status = response.data.status;
                         // this.loading=false;
                         console.log(response.data.code);
-                        if (status == 204) {
+                        if (status == 200) {
                             this.flush();
-                            alert("请求成功");
+                            alert("更新成功");
                         } else {
                             console.log("请求出错");
                             alert("请求出错");
@@ -213,7 +228,7 @@
                     console.log(response.data.code);
 
                     if (status == 200) {
-                        this.careers = response.data.data;
+                        this.employees = response.data.data;
                     } else {
                         console.log("请求出错");
                         alert("请求出错");
@@ -229,7 +244,7 @@
                 console.log("执行了这个请求");
                 this.$store.dispatch("GetLanguage", id).then(response => {
                     console.log("这里执行了");
-                    status = response.data.code;
+                    status = response.data.status;
 
                     this.loading = false;
                     console.log(response.data.code);
@@ -237,8 +252,7 @@
 
                     if (status == 200) {
                         if (response.data.data.length == 0) {
-                            this.errorMessage = "该员工不存在";
-                            alert("工号不可用");
+                            this.errorMessage = "已有改员工信息";
                         }
                         else {
                             this.errorMessage = "该员工存在";
@@ -254,7 +268,7 @@
                 console.log("执行了这个请求");
                 this.$store.dispatch("GetLanguage", id).then(response => {
                     console.log("这里执行了");
-                    status = response.data.code;
+                    status = response.data.status;
 
                     this.loading = false;
                     console.log(response.data.code);
@@ -263,7 +277,6 @@
                     if (status == 200) {
                         if (response.data.data.length == 0) {
                             this.errorMessage = "该员工不存在";
-                            alert("工号不可用");
                         }
                         else {
                             this.errorMessage = "该员工存在";
@@ -272,8 +285,8 @@
                 });
             },
 
-            deleteLanguage(id) {
-                console.log(id);
+            handelOk2(id) {
+                console.log("id",id);
                 this.loading = true;
                 console.log("执行了这个请求");
                 this.$store.dispatch("DeleteLanguage", id).then(response => {
@@ -283,7 +296,7 @@
                     console.log(response.data.code);
                     console.log(response.data.data);
 
-                    if (status == 204) {
+                    if (status == 200) {
                         alert("删除成功");
                         this.flush();
                     } else {

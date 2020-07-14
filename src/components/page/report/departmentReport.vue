@@ -12,14 +12,31 @@
         >
           <p>
             <div class="clearfix">
+          <div class="float-left">
+            <b-nav>
+              <b-form class="d-sm-down-none ml-5" inline>
+                <b-form-group>
+                  <b-input-group class="input-group-no-border">
+                    <template v-slot:prepend>
+                      <b-input-group-text @click="search"  ><i class="la la-search"/></b-input-group-text>
+                    </template>
+                    <b-form-input v-module="keyWord" id="search-input" placeholder="关键字" />
+                  </b-input-group>
+                </b-form-group>
+              </b-form>
+            </b-nav>
+          </div>
+
               <div class="float-right">
-                <b-button variant="default" class="mr-xs" size="sm" @click="exportToExcel" >导出excel</b-button>
-                <b-dropdown variant="inverse" class="mr-xs" size="sm" text="查询条件" right>
+
+
+                <b-button variant="default" class="mr-xs"  size="sm" @click="exportToExcel" >导出excel</b-button>
+                <b-dropdown  variant="inverse" class="mr-xs" size="sm" text="查询条件" right>
                   <b-dropdown-item @click="changeToMonth">本月</b-dropdown-item>
                   <b-dropdown-item @click="changeToYear">本年</b-dropdown-item>
                   <b-dropdown-divider />
-
                 </b-dropdown>
+
               </div>
         </div>
 
@@ -69,7 +86,8 @@ export default {
       Date:{
         startDate:"",
         endDate:""
-      }
+      },
+      keyWord:""
     };
   },
 
@@ -95,6 +113,23 @@ export default {
       else{
         this.flushByYear()
       }
+    },
+    search(){
+      // this.$store.dispatch("GetDepartmentTransfersByTime",dateTime).then(response => {
+      //   console.log("lalallala");
+      //   status = response.data.code;
+      //   this.loading = false;
+      //   console.log(response.data.code);
+      //
+      //   if (status == 200) {
+      //     console.log("lalallala");
+      //     this.transferList = response.data.data;
+      //   } else {
+      //     console.log("请求出错");
+      //     alert("请求出错");
+      //   }
+      //
+      // });
     },
 
     viewDepartment(departmentId) {
@@ -160,7 +195,7 @@ export default {
         endDate:endDate
       }
 
-      this.$store.dispatch("GetTransfersByTime",dateTime).then(response => {
+      this.$store.dispatch("GetDepartmentTransfersByTime",dateTime).then(response => {
         console.log("这里之情了");
         status = response.data.code;
         this.loading = false;
@@ -192,7 +227,7 @@ export default {
         endDate:endDate
       }
 
-      this.$store.dispatch("GetTransfersByTime",dateTime).then(response => {
+      this.$store.dispatch("GetDepartmentTransfersByTime",dateTime).then(response => {
         console.log("lalallala");
         status = response.data.code;
         this.loading = false;

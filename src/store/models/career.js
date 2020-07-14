@@ -28,9 +28,9 @@ const career={
                 })
             })
         },
-        UpdateCareer({commit},career,id){
+        UpdateCareer({commit},employee){
             return new Promise((resolve,reject)=>{
-                updateCareer(career,id).then(response=>{
+                updateCareer(employee).then(response=>{
                     commit('CHANGE')
                     console.log("responde",response)
                     resolve(response)
@@ -40,6 +40,7 @@ const career={
             })
         },
         DeleteCareer({commit},id){
+            console.log("进这还是");
             return new Promise((resolve,reject)=>{
                 deleteCareer(id).then(response=>{
                     commit('CHANGE')

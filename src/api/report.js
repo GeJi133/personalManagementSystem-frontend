@@ -2,6 +2,22 @@ import request from '@/util/request'
 
 import Qs from 'qs'
 
+
+export function getLeavingsByTime(data) {
+    return request({
+        url: '/reports/leavings/month',
+        method: 'get',
+        // headers: {
+        // 'token': localStorage.getItem('token'),
+        // 'Content-Type': 'application/x-www-form-urlencoded'
+        // },
+        params:{
+            year:year,
+            month:month
+        }
+    })
+}
+
 export function getLeavingByMonth(year,month) {
     return request({
         url: '/reports/leavings/month',
@@ -16,9 +32,9 @@ export function getLeavingByMonth(year,month) {
         }
     })
 }
-export function getTransferByTime(date) {
+export function getDepartmentTransferByTime(date) {
     return request({
-        url: '/reports/transfers/time',
+        url: '/reports/departmentTransfers/time',
         method: 'get',
         // headers: {
         // 'token': localStorage.getItem('token'),

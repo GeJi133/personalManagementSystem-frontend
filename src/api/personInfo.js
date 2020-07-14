@@ -23,7 +23,7 @@ export function getCareers() {
     })
 }
 
-export function updateCareer(career,id) {
+export function updateCareer(employee) {
     console.log("成功添加");
     return request({
         url:'/employee/career/',
@@ -32,8 +32,8 @@ export function updateCareer(career,id) {
             'Content-Type': 'application/JSON'
         },
         data:{
-            career,
-            id
+            career:employee.caree,
+            id:employee.id
         }
     })
 }
@@ -54,13 +54,13 @@ export function addCareer(id,career) {
 }
 
 export function deleteCareer(id) {
+    console.log("id:",id)
     return request({
-        url: '/employee/career/',
+        url: '/employee/career/'+id,
         method: 'delete',
-        headers: {
-            // 'token': localStorage.getItem('token'),
-            'Content-Type': 'application/JSON' },
-        data:id
+        // headers: {
+        //     // 'token': localStorage.getItem('token'),
+        //     'Content-Type': 'application/JSON' },
     })
 }
 
@@ -88,7 +88,7 @@ export function getFamilys() {
     })
 }
 
-export function updateFamily(family, id) {
+export function updateFamily(employee) {
     console.log("成功添加");
     return request({
         url:'/employee/family/',
@@ -97,13 +97,13 @@ export function updateFamily(family, id) {
             'Content-Type': 'application/JSON'
         },
         data:{
-            family,
-            id,
+            family:employee.family,
+            id:employee.id,
         }
     })
 }
 
-export function addFamily(id,family) {
+export function addFamily(employee) {
     console.log("add");
     return request({
         url: '/employee/family/',
@@ -112,8 +112,8 @@ export function addFamily(id,family) {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
         data:{
-            id,
-            family
+            family:employee.family,
+            id:employee.id,
         }
     })
 }
@@ -125,7 +125,7 @@ export function deleteFamily(id) {
         headers: {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
-        data:id
+
     })
 }
 
@@ -152,8 +152,8 @@ export function getLanguages() {
     })
 }
 
-export function updateLanguage(language,id) {
-    console.log("成功添加");
+export function updateLanguage(employee) {
+    console.log("成功更新了");
     return request({
         url:'/employee/language/',
         method:'put',
@@ -161,13 +161,13 @@ export function updateLanguage(language,id) {
             'Content-Type': 'application/JSON'
         },
         data:{
-            language,
-            id,
+            language:employee.language,
+            id:employee.id,
         }
     })
 }
 
-export function addLanguage(id,language) {
+export function addLanguage(employee) {
     console.log("add");
     return request({
         url: '/employee/language/',
@@ -176,8 +176,8 @@ export function addLanguage(id,language) {
             // 'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
         data:{
-            id,
-            language
+            language:employee.language,
+            id:employee.id,
         }
     })
 }
