@@ -136,7 +136,6 @@
         },
 
         methods:{
-
             viewCareer(id) {
                 console.log();
                 this.loading = true;

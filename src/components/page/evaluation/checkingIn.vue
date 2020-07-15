@@ -17,7 +17,8 @@
                                 <th>姓名</th>
                                 <th>性别</th>
                                 <th>E-mail</th>
-                                <th>考勤情况</th>
+                                <th>上班打卡时间</th>
+                                <th>下班打卡时间</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -29,7 +30,8 @@
                                 <td><a href="#" @click="viewCheckingIn(employee.id)">{{employee.name}}</a></td>
                                 <td><a href="#" @click="viewCheckingIn(employee.id)">{{employee.sex}}</a></td>
                                 <td><a href="#" @click="viewCheckingIn(employee.id)">{{employee.email}}</a></td>
-                                <td><a href="#" @click="viewCheckingIn(employee.id)">{{employee.career}}</a></td>
+                                <td><a href="#" @click="viewCheckingIn(employee.id)">{{employee.attendtime}}</a></td>
+                                <td><a href="#" @click="viewCheckingIn(employee.id)">{{employee.leavetime}}</a></td>
                                 <td>
                                     <button type="button" class="btn btn-success"
                                             v-b-modal="`model-1${employee.id}`">
@@ -39,6 +41,9 @@
                                     <b-modal @ok="handleOk(employee)" :id="`model-1${employee.id}`"  title="修改">
                                         <p class="widget-auth-info">
                                             请输入修改信息：
+                                        </p>
+                                        <p class="widget-auth-info">
+                                            工号{{employee.id}}：
                                         </p>
                                         <form class="mt" ref="form">
                                             <div class="form-group">
@@ -67,8 +72,6 @@
                 </Widget>
             </b-col>
         </b-row>
-
-
 
     </div>
 </template>
