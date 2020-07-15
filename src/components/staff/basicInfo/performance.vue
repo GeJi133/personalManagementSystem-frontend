@@ -8,56 +8,78 @@
           <p class="widget-auth-info">
 
           </p>
-          <form class="mt" @submit.prevent="submit" >
-            <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
-              {{errorMessage}}
-            </b-alert>
+          <form class="mt" v-for="staffmaster in staffmasters" :key="staffmaster.id" >
+
             <div class="form-group">
               <p>职工编号：</p>
-              <input class="form-control no-border" ref="email" required type="text" name="email" value="820183008" readonly/>
+              <a href="#" @click="ViewStaffmaster(staffmaster.id)">{{staffmaster.id}}</a>
             </div>
             <div class="form-group">
               <p>姓名：</p>
-              <input class="form-control no-border" ref="password" required type="text" name="password" value="马鑫" readonly/>
+              <a href="#" @click="ViewStaffmaster(staffmaster.name)">{{staffmaster.name}}</a>
             </div> <div class="form-group">
             <p>性别：</p>
-            <input class="form-control no-border" ref="password" required type="text" name="password" value="男" readonly/>
+            <a href="#" @click="ViewStaffmaster(staffmaster.sex)">{{staffmaster.sex}}</a>
           </div>
             <div class="form-group">
               <p>隶属部门：</p>
-              <input class="form-control no-border" ref="password" required type="text" name="password" value="人力资源部" readonly/>
+              <a href="#" @click="ViewStaffmaster(staffmaster.department)">{{staffmaster.department}}</a>
+            </div>
+            <div class="form-group">
+              <p>任职经历：</p>
+              <a href="#" @click="ViewStaffmaster(staffmaster.career)">{{staffmaster.career}}</a>
+            </div>
+            <div class="form-group">
+              <p>员工属性：</p>
+              <a href="#" @click="ViewStaffmaster(staffmaster.position)">{{staffmaster.position}}</a>
             </div>
             <div class="form-group">
               <p>在职岗位：</p>
-              <input class="form-control no-border" ref="password" required type="text" name="password" value="人力专员" readonly/>
+              <a href="#" @click="ViewStaffmaster(staffmaster.jobs)"></a>
             </div>
             <div class="form-group">
-              <p>上岗日期：</p>
-              <input class="form-control no-border" ref="password" required type="text" name="password" value="2020.2.3" readonly/>
+              <p>英语程度：</p>
+              <a href="#" @click="ViewStaffmaster(staffmaster.language)">{{staffmaster.language}}</a>
             </div>
             <div class="form-group">
-              <p>任职时长：</p>
-              <input class="form-control no-border" ref="password" required type="text" name="password" value="两年" readonly/>
+              <p>家庭状况：</p>
+              <a href="#" @click="ViewStaffmaster(staffmaster.family)">{{staffmaster.family}}</a>
             </div>
             <div class="form-group">
-              <p>进本工资：</p>
-              <input class="form-control no-border" ref="password" required type="text" name="password" value="5000" readonly/>
-            </div>
-            <hr style="height: 2px">
-            <div class="form-group">
-              <p>岗位调换：</p>
-              <button @click="goDepartment" class="form-control btn-success">调岗申请</button>
+              <p>邮件：</p>
+              <a href="#" @click="ViewStaffmaster(staffmaster.email)">{{staffmaster.email}}</a>
             </div>
             <div class="form-group">
-              <p>部门调换：</p>
-              <button @click="goPost" class="form-control btn-success">调部申请</button>
+              <p>任职时间：</p>
+              <a href="#" @click="ViewStaffmaster(staffmaster.starttime)">{{staffmaster.starttime}}</a>
             </div>
             <div class="form-group">
-              <p>离职：</p>
-              <button @click="Leave" class="form-control btn-success">离职申请</button>
+              <p>退休时间：</p>
+              <a href="#" @click="ViewStaffmaster(staffmaster.endtime)">{{staffmaster.endtime}}</a>
             </div>
-
           </form>
+          <div class="form-group">
+            <p>岗位调换：</p>
+            <button @click="goDepartment" class="form-control btn-success">调岗申请</button>
+          </div>
+          <div class="form-group">
+            <p>部门调换：</p>
+            <button @click="goPost" class="form-control btn-success">调部申请</button>
+          </div>
+          <div class="form-group">
+            <p>离职：</p>
+            <button @click="Leave" class="form-control btn-success">离职申请</button>
+          </div>
+          <div class="form-group">
+            <p>转正：</p>
+            <button @click="Positive" class="form-control btn-success">转正申请</button>
+          </div>
+          <div class="form-group">
+            <p>修改个人信息：</p>
+            <button class="form-control btn-success" @click="Modperson">修改</button>
+
+          </div>
+
 
         </Widget>
       </div>
@@ -69,15 +91,43 @@
   export default {
     name:'performance',
     methods:{
-      goDepartment() {
-        this.$router.push("/staff/salary");
-      },
+     ViewStaffmaster(id,name,sex,department,career,position,jobs,language,family,email,starttime,endtime){
+       this.loading=true;
+       this.$store.dispatch("GetStaffmaster",{id,name,sex,department,career,position,jobs,language,family,email,starttime,endtime}).then(response => {
+         status = response.data.code;
+         this.loading = false;
+         console.log(response.data.code);
+
+         if (status == 200) {
+           let staffmaster = response.data.data[0];
+           console.log("department", staffmaster);
+           // alert("dhjakdhk");
+           this.$router.push({
+             path: "/staff/performance",
+             query: { department: staffmaster }
+           });
+         } else {
+
+           alert("请求出错");
+         }
+       });
+
+     },
+     goDepartment(){
+       this.$router.push("/staff/salary")
+     },
       goPost(){
-        this.$router.push("/staff/movepost")
+       this.$router.push("/staff/movepost")
       },
       Leave(){
-        this.$router.push("/staff/leavestaff")
+       this.$router.push("/staff/leavestaff")
       },
+      Positive(){
+       this.$router.push("/staff/positivestaff")
+      },
+      Modperson(){
+       this.$router.push("/staff/updatestaff")
+      }
     }
   }
 </script>

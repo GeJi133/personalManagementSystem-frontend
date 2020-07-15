@@ -5,10 +5,10 @@ export function getCareer(id) {
     return request({
         url: '/employee/career/' + id+'?type=id',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -16,10 +16,10 @@ export function getCareers() {
     return request({
         url: '/employee/career/',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -44,7 +44,7 @@ export function addCareer(id,career) {
         url: '/employee/career/',
         method: 'post',
         headers: {
-            // 'token': localStorage.getItem('token'),
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
         data:{
             id,
@@ -58,9 +58,9 @@ export function deleteCareer(id) {
     return request({
         url: '/employee/career/'+id,
         method: 'delete',
-        // headers: {
-        //     // 'token': localStorage.getItem('token'),
-        //     'Content-Type': 'application/JSON' },
+        headers: {
+            'token': localStorage.getItem('token'),
+            'Content-Type': 'application/JSON' },
     })
 }
 
@@ -70,10 +70,10 @@ export function getFamily(id) {
     return request({
         url: '/employee/family/' + id+'?type=id',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -81,10 +81,10 @@ export function getFamilys() {
     return request({
         url: '/employee/family/',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -94,6 +94,7 @@ export function updateFamily(employee) {
         url:'/employee/family/',
         method:'put',
         header:{
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON'
         },
         data:{
@@ -109,7 +110,7 @@ export function addFamily(employee) {
         url: '/employee/family/',
         method: 'post',
         headers: {
-            // 'token': localStorage.getItem('token'),
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
         data:{
             family:employee.family,
@@ -123,7 +124,7 @@ export function deleteFamily(id) {
         url: '/employee/family/'+id,
         method: 'delete',
         headers: {
-            // 'token': localStorage.getItem('token'),
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
 
     })
@@ -134,10 +135,10 @@ export function getLanguage(id) {
     return request({
         url: '/employee/language/' + id+'?type=id',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -145,10 +146,10 @@ export function getLanguages() {
     return request({
         url: '/employee/language/',
         method: 'get',
-        // headers: {
-        // 'token': localStorage.getItem('token'),
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-        // },
+        headers: {
+        'token': localStorage.getItem('token'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
     })
 }
 
@@ -158,6 +159,7 @@ export function updateLanguage(employee) {
         url:'/employee/language/',
         method:'put',
         header:{
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON'
         },
         data:{
@@ -173,7 +175,7 @@ export function addLanguage(employee) {
         url: '/employee/language/',
         method: 'post',
         headers: {
-            // 'token': localStorage.getItem('token'),
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
         data:{
             language:employee.language,
@@ -187,7 +189,7 @@ export function deleteLanguage(id) {
         url: '/employee/language/'+ id,
         method: 'delete',
         headers: {
-            // 'token': localStorage.getItem('token'),
+            'token': localStorage.getItem('token'),
             'Content-Type': 'application/JSON' },
         data:id
     })

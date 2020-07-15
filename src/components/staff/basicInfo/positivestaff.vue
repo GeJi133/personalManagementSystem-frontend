@@ -2,15 +2,18 @@
   <div class="page" >
     <div class="pb-xlg h-100" style="margin-left: 40%">
 
-      <Widget  class="widget-auth " title="<h3 class='mt-0'>员工离职申请</h3>" customHeader >
-        <form class="mt" ref="form" @submit="handleOk4">
+      <Widget  class="widget-auth " title="<h3 class='mt-0'>实习生转正申请</h3>" customHeader >
+        <p class="widget-auth-info">
+
+        </p>
+        <form class="mt" ref="form" @submit="handleOk5">
           <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">{{errorMessage}}</b-alert>
           <div class="form-group">
-            <p class="widget-auth-info">离职编号：</p>
+            <p class="widget-auth-info">编号：</p>
             <input
-              @change="checkleavingid()"
+              @change="checktransferid()"
               class="form-control no-border"
-              v-model="addleaving.leavingId"
+              v-model="addpositive.transferId"
               placeholder="编号"
             />
           </div>
@@ -19,31 +22,32 @@
             <input
               @change="checkDno()"
               class="form-control no-border"
-              v-model="addleaving.id"
+              v-model="addpositive.id"
               placeholder="员工号"
             />
           </div>
           <!--       -->
           <div class="form-group">
-            <p class="widget-auth-info">所在部门：</p>
+            <p class="widget-auth-info">转正理由：</p>
             <input
               class="form-control no-border"
-              v-model="addleaving.department"
-              placeholder="所在部门"
+              v-model="addpositive.transferReason"
+              placeholder="转正理由"
             />
           </div>
           <div class="form-group">
-            <p class="widget-auth-info">申请理由：</p>
+            <p class="widget-auth-info">申请状态：</p>
             <input
               class="form-control no-border"
-              v-model="addleaving.leavingReason"
-              placeholder="申请理由"
+              v-model="addpositive.status"
+              readonly
+              value="0"
             />
           </div>
           <div class="form-group">
             <input
               class="form-control  btn-success"
-             type="submit"
+              type="submit"
               value="申请"
             />
           </div>
@@ -59,24 +63,29 @@
 
 <script>
     export default {
-        name: "leavestaff",
+        name: "positivestaff",
       data() {
           return {
-            addleaving:[],
+            addpositive:[],
+            trycontrols:{},
+            data:{transferId:"transferId",
+              id:"id",
+              transferReason:"transferReason",
+              status:"status"},
           }
       },
-      methods: {
+      methods:{
         flush() {
           this.loading = true;
           console.log("执行了这个请求");
-          this.$store.dispatch("GetStaffover").then(response => {
+          this.$store.dispatch("GetTrycontrol").then(response => {
             console.log("这里执行了");
             status = response.data.code;
             this.loading = false;
             console.log(response.data.code);
 
-            if (status == 200) {
-              this.staffovers = response.data.data;
+            if (status == 204) {
+              this.trycontrols = response.data.data;
             } else {
               // eslint-disable-next-line no-console
               console.log("请求出错");
@@ -84,12 +93,12 @@
             }
           });
         },
-        handleOk4() {
+        handleOk5() {
           console.log("zhieshoa");
           // this.loading=true;
           console.log("执行了这个请求");
           this.$store
-            .dispatch("AddStaffover", this.addleaving)
+            .dispatch("AddTrycontrol", this.addpositive)
             .then(response => {
               console.log("这里之情了");
               console.log(response);
@@ -105,13 +114,13 @@
               }
             });
         },
-        checkleavingid() {
-          let leavingid=this.addleaving.id;
+        checktransferid() {
+          let transferid=this.addpositive.id;
           console.log("请求成功");
 
           this.loading = true;
           console.log("执行了这个请求");
-          this.$store.dispatch("GetStaffmove", leavingid).then(response => {
+          this.$store.dispatch("GetStaffmove", transferid).then(response => {
             console.log("这里之情了");
             status = response.data.code;
 

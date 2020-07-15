@@ -4,59 +4,73 @@
     <b-col lg="3" sm="6" xs="12" style="display: inline-block">
       <div class="pb-xlg h-100">
         <div>
-          <b-button size="sm" class="auth-btn mb-3 btn-success"  v-b-modal.modal-1>岗位调动申请</b-button>
+          <b-button size="sm" class="auth-btn mb-3 btn-success"  v-b-modal="`modal-1`">岗位调动申请</b-button>
 
-          <b-modal id="modal-1"  title="岗位调动申请表" style="margin-left: 40%">
+          <b-modal id="modal-1"  title="岗位调动申请表" style="margin-left: 40%"  @ok="handleOk2">
 
             <!--            <Widget class="widget-auth mx-auto" title="<h3 class='mt-0'>Login to your Web App</h3>" customHeader>-->
-            <form class="mt" @submit.prevent="submit" >
-              <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
-                {{errorMessage}}
-              </b-alert>
+            <form class="mt" ref="form">
+              <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">{{errorMessage}}</b-alert>
               <div class="form-group">
-                <p>职工编号：</p>
-                <input class="form-control no-border" ref="email" required type="text" name="email" placeholder="编号"/>
+                <p class="widget-auth-info">编号：</p>
+                <input
+                  @change="checkDno()"
+                  class="form-control no-border"
+                  v-model="addPostmove.transferId"
+                  placeholder="员工编号"
+                />
               </div>
               <div class="form-group">
-                <p>姓名：</p>
-                <input class="form-control no-border" ref="password" required type="text" name="password" placeholder="你的名字"/>
-              </div> <div class="form-group">
-              <p>性别：</p>
-              <input class="form-control no-border" ref="password" required type="text" name="password" placeholder="你的性别"/>
-            </div>
+                <p class="widget-auth-info">员工号：</p>
+                <input
+                  @change="checkDno()"
+                  class="form-control no-border"
+                  v-model="addPostmove.id"
+                  placeholder="员工编号"
+                />
+              </div>
+              <!--       -->
               <div class="form-group">
-                <p>原隶属岗位：</p>
-                <select class="form-control no-border">
-                  <option>行政专员</option>
-                  <option>财务专员</option>
-                  <option>营销专员</option>
-                  <option>人力专员</option>
-                  <option>行政主管</option>
-                  <option>财务主管</option>
-                  <option>营销主管</option>
-                  <option>人力主管</option>
+                <p class="widget-auth-info">申请理由：</p>
+                <input
+                  class="form-control no-border"
+                  v-model="addPostmove.transferReason"
+                  placeholder="姓名"
+                />
+              </div>
 
-                </select>
+              <div class="form-group">
+                <p class="widget-auth-info">申请时间</p>
+                <input
+                  class="form-control no-border"
+                  v-model="addPostmove.transferTime"
+                  placeholder="性别"
+                />
               </div>
               <div class="form-group">
-                <p>申请转换岗位：</p>
-                <select class="form-control no-border">
-                  <option>行政专员</option>
-                  <option>财务专员</option>
-                  <option>营销专员</option>
-                  <option>人力专员</option>
-                  <option>行政主管</option>
-                  <option>财务主管</option>
-                  <option>营销主管</option>
-                  <option>人力主管</option>
-                </select>
+                <p class="widget-auth-info">原岗位：</p>
+                <input
+                  class="form-control no-border"
+                  v-model="addPostmove.jobBefore"
+                  placeholder="原岗位"
+                />
               </div>
               <div class="form-group">
-                <p>申请理由：</p>
-                <textarea  class="form-control no-border" style="height: 100px" placeholder="不得少于200字"></textarea>
+                <p class="widget-auth-info">申请岗位：</p>
+                <input
+                  class="form-control no-border"
+                  v-model="addPostmove.jobAfter"
+                  placeholder="申请岗位"
+                />
               </div>
               <div class="form-group">
-                <b-button type="submit" size="sm" class="auth-btn mb-3" variant="inverse">submit</b-button>
+                <p class="widget-auth-info">申请状态</p>
+                <input
+                  class="form-control no-border"
+                  value="0"
+                  v-model="addPostmove.status"
+                  readonly
+                />
               </div>
 
 
@@ -218,7 +232,7 @@
   export default {
     name:'salary',
     components: {
-      Widget, BigStat,highcharts: Chart,echart: ECharts,Sparklines
+      //Widget, BigStat,highcharts: Chart,echart: ECharts,Sparklines
     },
     data() {
       return {
@@ -228,42 +242,84 @@
           renderer: 'canvas'
         },
         jobList:department.jobList,
-        department:department.department
+        department:department.department,
+        addPostmove:{},
+        data:{transferId:"transferId",
+          id:"id",
+          transferReason:"transferReason",
+          transferTime:"transferTime",
+          jobBefore:"jobBefore",
+          jobAfter:"jobAfter",
+          status:"status"},
       };
     },
     methods: {
-      viewJob(dno){
-        console.log(dno);
-        // alert("dhjakdhk");
-        this.$router.push({
-          path: "/app/viewJob",
-          query: { message: "response.data.message" }
+      flush() {
+        this.loading = true;
+        console.log("执行了这个请求");
+        this.$store.dispatch("GetPostmoves").then(response => {
+          console.log("这里执行了");
+          status = response.data.code;
+          this.loading = false;
+          console.log(response.data.code);
+
+          if (status == 200) {
+            this.postmoves = response.data.data;
+          } else {
+            // eslint-disable-next-line no-console
+            console.log("请求出错");
+            alert("请求出错");
+          }
         });
       },
-      handlOk(dno){
-        bvModalEvt.preventDefault();
-        this.manage(dno);
-      },
-      // eslint-disable-next-line no-unused-vars
-      manage(dno){
-        this.$nextTick()
-      },
-      addJob(dno){
+      checkDno() {
+        let postmoveid=this.addPostmove.id;
+        console.log(postmoveid);
 
-      },
-      deleteDepartment(dno){
+        this.loading = true;
+        console.log("执行了这个请求");
+        this.$store.dispatch("GetDepartment", postmoveid).then(response => {
+          console.log("这里之情了");
+          status = response.data.code;
 
-      },
-      showMsgBoxOne() {
-        this.boxOne = ''
-        this.$bvModal.msgBoxOk('Action completed')
-          .then(value => {
+          this.loading = false;
+          console.log(response.data.code);
+          console.log(response.data.data);
 
-          })
-          .catch(err => {
-            // An error occurred
-          })
+          if (status == 200) {
+            if (response.data.data.length == 0) {
+              this.errorMessage = "员工编号编号可用";
+              alert("员工编号可用");
+            }
+            else {
+              this.errorMessage = "编号重复";
+            }
+          }
+        });
       },
+      handleOk2(transferId,id,transferReason,transferTime,jobBefore,jobAfter,status) {
+        this.loading=true;
+        this.$store.dispatch("AddPostmove",{transferId,id,transferReason,transferTime,jobBefore,jobAfter,status}).then(response=>{
+          status = response.data.code;
+          if (status == 204) {
+            this.flush();
+            alert("请求成功");
+          } else {
+            console.log("请求出错");
+            alert("请求出错");
+          }
+        })
+      }
+      // showMsgBoxOne() {
+      //   this.boxOne = ''
+      //   this.$bvModal.msgBoxOk('Action completed')
+      //     .then(value => {
+      //
+      //     })
+      //     .catch(err => {
+      //       // An error occurred
+      //     })
+      // },
 
       // getRandomData() {
       //     const arr = [];

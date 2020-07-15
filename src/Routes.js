@@ -45,6 +45,7 @@ import departmentmove from "./components/page/personnel/departmentmove";
 import jobgetcontrol from "./components/page/personnel/jobgetcontrol";
 import postmove from "./components/page/personnel/postmove";
 import staffover from "./components/page/personnel/staffover";
+import trycontrol from "./components/page/personnel/trycontrol";
 
 import checkingIn from '@/components/page/evaluation/checkingIn';
 import salary from '@/components/page/evaluation/salary';
@@ -244,6 +245,11 @@ export default new Router({
           path: 'jobgetcontrol',
           name: 'jobgetcontrol',
           component: jobgetcontrol,
+        },
+        {
+          path: 'trycontrol',
+          name: 'trycontrol',
+          component: trycontrol,
         },
         {
           path: 'postmove',

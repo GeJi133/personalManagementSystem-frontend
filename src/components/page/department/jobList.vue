@@ -134,10 +134,10 @@
                                         岗位编号：
                                         <p class="widget-auth" v-model="job.dno">{{job.dno}}</p>
                                         <form class="mt" ref="form" >
-                                            <!--                                            <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">-->
-                                            <!--                                                {{errorMessage}}-->
+                                                                                        <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
+                                                                                            {{errorMessage}}
 
-                                            <!--                                            </b-alert>-->
+                                                                                        </b-alert>
                                             <div class="form-group">
                                                 <p class="widget-auth-info">岗位名称：</p>
                                                 <input

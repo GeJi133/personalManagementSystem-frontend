@@ -4,57 +4,67 @@
       <b-col lg="3" sm="6" xs="12" style="display: inline-block">
         <div class="pb-xlg h-100">
           <div>
-            <b-button size="sm" class="auth-btn mb-3 btn-success"  v-b-modal.modal-1>部门调动申请</b-button>
+            <b-button size="sm" class="auth-btn mb-3 btn-success"   v-b-modal="`modal-1`">部门调动申请</b-button>
 
-            <b-modal id="modal-1"  title="调动申请表" style="margin-left: 40%">
+            <b-modal id="modal-1"  title="调动申请表" style="margin-left: 40%" @ok="handleOk3">
 
               <!--            <Widget class="widget-auth mx-auto" title="<h3 class='mt-0'>Login to your Web App</h3>" customHeader>-->
               <p class="widget-auth-info">
                 部门调动
               </p>
-              <form class="mt" @submit.prevent="submit" >
-                <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
-                  {{errorMessage}}
-                </b-alert>
+              <form class="mt" ref="form">
+                <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">{{errorMessage}}</b-alert>
                 <div class="form-group">
-                  <p>职工编号：</p>
-                  <input class="form-control no-border" ref="email" required type="text" name="email" placeholder="编号"/>
+                  <p class="widget-auth-info">编号：</p>
+                  <input
+                    @change="checktransferid()"
+                    class="form-control no-border"
+                    v-model="addDepartmentmove.transferId"
+                    placeholder="编号"
+                  />
                 </div>
                 <div class="form-group">
-                  <p>姓名：</p>
-                  <input class="form-control no-border" ref="password" required type="text" name="password" placeholder="你的名字"/>
-                </div> <div class="form-group">
-                <p>性别：</p>
-                <input class="form-control no-border" ref="password" required type="text" name="password" placeholder="你的性别"/>
-              </div>
+                  <p class="widget-auth-info">员工号：</p>
+                  <input
+                    @change="checkDno()"
+                    class="form-control no-border"
+                    v-model="addDepartmentmove.id"
+                    placeholder="员工号"
+                  />
+                </div>
+                <!--       -->
                 <div class="form-group">
-                  <p>原隶属部门：</p>
-                  <select class="form-control no-border">
-                    <option>行政部</option>
-                    <option>财务部</option>
-                    <option>营销部</option>
-                    <option>人力资源部</option>
-
-                  </select>
+                  <p class="widget-auth-info">申请理由：</p>
+                  <input
+                    class="form-control no-border"
+                    v-model="addDepartmentmove.transferReason"
+                    placeholder="申请理由"
+                  />
                 </div>
                 <div class="form-group">
-                  <p>申请转换的部门：</p>
-                  <select class="form-control no-border">
-                    <option>行政部</option>
-                    <option>财务部</option>
-                    <option>营销部</option>
-                    <option>人力资源部</option>
-                  </select>
+                  <p class="widget-auth-info">申请时间：</p>
+                  <input
+                    class="form-control no-border"
+                    v-model="addDepartmentmove.transferTime"
+                    placeholder="申请理由"
+                  />
                 </div>
                 <div class="form-group">
-                  <p>申请理由：</p>
-                  <textarea  class="form-control no-border" style="height: 100px" placeholder="不得少于200字"></textarea>
+                  <p class="widget-auth-info">原部门：</p>
+                  <input
+                    class="form-control no-border"
+                    v-model="addDepartmentmove.departmentBefore"
+                    placeholder="原部门"
+                  />
                 </div>
                 <div class="form-group">
-                  <b-button type="submit" size="sm" class="auth-btn mb-3" variant="inverse">submit</b-button>
+                  <p class="widget-auth-info">申请部门：</p>
+                  <input
+                    class="form-control no-border"
+                    v-model="addDepartmentmove.departmentAfter"
+                    placeholder="申请部门"
+                  />
                 </div>
-
-
               </form>
 
               <!--            </Widget>-->
@@ -210,66 +220,82 @@
             renderer: 'canvas'
           },
           jobList:department.jobList,
-          department:department.department
+          department:department.department,
+          addDepartmentmove:{},
+          data:{transferId:"transferId",
+            id:"id",
+            transferReason:"transferReason",
+            transferTime:"transferTime",
+            departmentBefore:"jobBefore",
+            departmentAfter:"jobAfter"
+          },
         };
       },
       methods: {
-        viewJob(dno){
-          console.log(dno);
-          // alert("dhjakdhk");
-          this.$router.push({
-            path: "/app/viewJob",
-            query: { message: "response.data.message" }
+        flush() {
+          this.loading = true;
+          console.log("执行了这个请求");
+          this.$store.dispatch("GetDepartmentmove").then(response => {
+            console.log("这里执行了");
+            status = response.data.code;
+            this.loading = false;
+            console.log(response.data.code);
+
+            if (status == 200) {
+              this.departmentmoves = response.data.data;
+            } else {
+              // eslint-disable-next-line no-console
+              console.log("请求出错");
+              alert("请求出错");
+            }
           });
         },
-        handlOk(dno){
-          bvModalEvt.preventDefault();
-          this.manage(dno);
+        handleOk3() {
+          console.log("zhieshoa");
+          // this.loading=true;
+          console.log("执行了这个请求");
+          this.$store
+            .dispatch("AddDepartmentmove", this.addDepartmentmove)
+            .then(response => {
+              console.log("这里之情了");
+              console.log(response);
+              status = response.data.code;
+              // this.loading=false;
+              console.log(response.data.code);
+              if (status == 204) {
+                this.flush();
+                alert("添加成功");
+              } else {
+                console.log("请求出错");
+                alert("请求出错");
+              }
+            });
         },
-        // eslint-disable-next-line no-unused-vars
-        manage(dno){
-          this.$nextTick()
-        },
-        addJob(dno){
+        checktransferid() {
+          let departmentmoveid=this.addDepartmentmove.id;
+          console.log(departmentmoveid);
 
-        },
-        deleteDepartment(dno){
+          this.loading = true;
+          console.log("执行了这个请求");
+          this.$store.dispatch("GetDepartment", departmentmoveid).then(response => {
+            console.log("这里之情了");
+            status = response.data.code;
 
-        },
-        showMsgBoxOne() {
-          this.boxOne = ''
-          this.$bvModal.msgBoxOk('Action completed')
-            .then(value => {
+            this.loading = false;
+            console.log(response.data.code);
+            console.log(response.data.data);
 
-            })
-            .catch(err => {
-              // An error occurred
-            })
+            if (status == 204) {
+              if (response.data.data.length == 0) {
+                this.errorMessage = "员工编号编号可用";
+                alert("员工编号可用");
+              }
+              else {
+                this.errorMessage = "编号重复";
+              }
+            }
+          });
         },
-
-        // getRandomData() {
-        //     const arr = [];
-        //
-        //     for (let i = 0; i < 25; i += 1) {
-        //         arr.push(Math.random().toFixed(1) * 10);
-        //     }
-        //
-        //     return arr;
-        // },
-        // getRevenueData() {
-        //     const data = [];
-        //     const seriesCount = 3;
-        //     const accessories = ['SMX', 'Direct', 'Networks'];
-        //
-        //     for (let i = 0; i < seriesCount; i += 1) {
-        //         data.push({
-        //             label: accessories[i],
-        //             data: Math.floor(Math.random() * 100) + 1,
-        //         });
-        //     }
-        //
-        //     return data;
-        // }
       },
       computed: {
         // donut() {

@@ -73,7 +73,7 @@
                   index="components"
                   :childrenLinks="[
               { header: '员工入职管理', link: '/manage/jobgetcontrol' },
-              { header: '试用期管理', link: '/manage/confimationcontrol' },
+              { header: '试用期管理', link: '/manage/trycontrol' },
               { header: '部门调动管理', link: '/manage/departmentmove' },
               { header: '岗位调动管理', link: '/manage/postmove' },
               { header: '员工离职管理', link: '/manage/staffover' },
